@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    #chart {
+      width: 100%;
+      background-color: #f1f1f1;
+    }
+
+    #chart #line {
+      --totalLength: 0;
+      stroke-dasharray: var(--totalLength);
+      stroke-dashoffset: var(--totalLength);
+
+    }
+
+    .text {
+      fill: rgba(0, 0, 0, .5);
+      font-size: 6px;
+    }
+
+    @keyframes link {
+      from {
+        stroke-dashoffset: var(--totalLength);
+      }
+
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    #chart g .point {
+      opacity: 0;
+    }
+
+    #chart #line.active {
+      animation: 3s link linear forwards;
+      /* 线条总时长和点淡入时长是一样的，但是视觉上线条连接速度快一点，给线条连接动画一点延迟，
+      看上去整体更流畅一点 */
+      animation-delay: .12s;
+    }
+
+    #chart g .point.active {
+      /* 两个动画是同时进行的，都进行0.5s */
+      animation: .5s fade-in ease-in-out, .5s zoom-in ease-in-out;
+      animation-fill-mode: forwards;
+      animation-delay: var(--delay);
+    }
+
+    @keyframes zoom-in {
+      from {
+        transform: scale(0);
+      }
+
+      to {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <svg viewBox='0 0 400 200' id="chart">
+    <g transform='translate(0,200) scale(1,-1)' id='gcontainer'>
+      <path stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'
+        d='M50,80 L100,170 L150,90 L200,50 L250,200 L300,0 H350 L400,50' stroke='#a29bfe' id='line'></path>
+    </g>
+  </svg>
+  <button>点击连线</button>
+</body>
+<script>
+  const random = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1) + min)
+  }
+  const generatePoints = (size) => {
+    return new Array(size).fill(0).map((i, index, arr) => {
+      const count = 400
+      let start_percent = index / arr.length
+      let end_percent = (index + 1) / arr.length
+      let start = 400 * start_percent
+      let end = 400 * end_percent
+      return {
+        x: random(start, end),
+        y: random(0, 200)
+      }
+
+    })
+  }
+  const arr = generatePoints(7)
+  // console.log(arr)
+
+  const drawLine = (selector, point_arr) => {
+    const line = document.querySelector(selector)
+    // console.log(line.getAttribute('d'))
+    console.log(point_arr)
+    let d = 'M'
+    point_arr.forEach(({ x, y }, index, arr) => {
+      if (index == arr.length - 1) {
+        d += `${x},${y}`
+      } else {
+        d += `${x},${y} L`
+      }
+
+    })
+    // console.log(d)
+    line.setAttribute('d', d)
+    point_arr.forEach(({ x, y }, index, arr) => {
+      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle')
+      circle.setAttribute('cx', x)
+      circle.setAttribute('cy', y)
+      circle.setAttribute('transform-origin', `${x} ${y}`)
+      circle.setAttribute('r', 3)
+      circle.setAttribute('stroke', '#a29bfe')
+      circle.setAttribute('stroke-width', 2)
+      circle.setAttribute('fill', '#fff')
+      circle.style.setProperty('--delay', `${3 * (index / (arr.length - 1))}s`)
+      circle.classList.add('point')
+
+      document.querySelector('#gcontainer').appendChild(circle)
+    })
+    point_arr.forEach(({ x, y }, index) => {
+      const text = document.createElementNS('http://www.w3.org/2000/svg', 'text')
+      text.classList.add('text')
+      text.setAttribute('text-anchor', 'middle')
+      text.setAttribute('alignment-baseline', 'middle')
+      text.setAttribute('x', x)
+      text.setAttribute('y', y)
+      text.setAttribute('transform', `scale(1, -1) translate(0,${-2 * y + 15}) `)
+      text.appendChild(document.createTextNode(`星期${index + 1}`))
+      document.querySelector('#gcontainer').appendChild(text)
+
+    })
+
+    //getTotalLength是svg提供的接口，计算路径总长度的，不用自己写
+    let strokelength = Math.ceil(line.getTotalLength())
+    line.style.setProperty('--totalLength', strokelength)
+  }
+  drawLine('#line', generatePoints(7))
+  window.onload = function () {
+    document.querySelector('button').addEventListener('click', function () {
+      document.querySelector('#line').classList.toggle('active')
+      const points = document.querySelectorAll(' .point')
+      points.forEach((item) => {
+        item.classList.toggle('active')
+      })
+    })
+  }
+</script>
+
+</html>

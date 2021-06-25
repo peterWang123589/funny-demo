@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style type="text/css">
+      /* div {
+        width: 100px;
+        height: 100px;
+        background-color: purple;
+        border-radius: 10em 0em / 10em 0em;
+      } */
+      #aaa {
+        width: 50px;
+        height: 50px;
+        border-top: 40px solid black;
+        border-left: 40px solid peru;
+        border-bottom: 40px solid yellowgreen;
+        border-right: 40px solid plum;
+      }
+      .box1 {
+        width: 0;
+        color: blue;
+        border: 20px solid transparent;
+        border-right: 20px solid blue;
+        box-shadow: 30px 0 0 -10px;
+      }
+      .box2 {
+        width: 0;
+        color: blue;
+        border: 20px solid transparent;
+        border-left: 20px solid blue;
+        box-shadow: -30px 0 0 -10px;
+        transform: translate(50px, 0);
+      }
+      .box3 {
+        width: 0;
+        color: blue;
+        border: 20px solid transparent;
+        border-bottom: 20px solid blue;
+        box-shadow: 0 30px 0 -10px;
+        transform: rotate(90deg) translate(0, -40px);
+        /* transform: translate(20px, 0); */
+      }
+      div {
+        width: 60px;
+        height: 50px;
+        left: 0;
+        bottom: -27px;
+        box-shadow: inset 0 0 0 50px, 30px -20px 0 0;
+        transform: rotate(45deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+    <!-- <div id="aaa"></div> -->
+    <!-- <ul id="aaa"></ul> -->
+    <p class="box1"></p>
+    <p class="box2"></p>
+    <p class="box3"></p>
+    <script>
+      // for (var i = 0; i < 10; i++) {
+      //   console.log(i);
+      // }
+      // for (let i = 0; i < 10; i++) {
+      //   console.log(i);
+      // }
+      // console.log(i);
+
+      // var colors1 = ["#000", "#fff"];
+      // var colors2 = ["#f00", "#0f0", "#00f", "#000"];
+      // var colors3 = [...colors2, ...colors1];
+      // const colors = colors3.map((color) => {
+      //   return { color };
+      // });
+      // console.log(colors);
+
+      // let last = colors.filter((color) => {
+      //   return color.color === "#000";
+      // });
+      // console.log(last);
+
+      // class Car {
+      //   constructor({ brand, price, color }) {
+      //     this.brand = brand;
+      //     this.price = price;
+      //     this.color = color;
+      //   }
+      //   drive() {
+      //     alert("我已经在开车来了");
+      //   }
+      // }
+      // const car1 = new Car({ brand: "宝马", price: 1000000, color: "blue" });
+      // const car2 = new Car({ brand: "奔驰", price: 400000, color: "black" });
+      // const car3 = new Car({ brand: "兰博基尼", price: 5000000, color: "red" });
+      // const cars = [car1, car2, car3];
+      // var prices = cars.map((car) => {
+      //   return car.price * 1.05;
+      // });
+      // // console.log(car1);
+      // // console.log(car2);
+      // console.log(prices);
+
+      // async function getData(url) {
+      //   const res = await fetch(url);
+      //   const data = await res.json();
+      //   const titles = data.map((each) => {
+      //     return each.title;
+      //   });
+      //   console.log(titles);
+      //   let output = "";
+      //   titles.forEach((num) => {
+      //     output += `<li>${num}</li>`;
+      //   });
+      //   document.getElementById("aaa").innerHTML = output;
+      // }
+      // getData("http://jsonplaceholder.typicode.com/posts");
+
+      // let { PI, sin, cos } = Math;
+      // console.log(2 * sin(PI / 3) + cos(PI));
+
+      // var node = {
+      //   loc: { mac: 1, window: 2, linux: { ubantu: "号锡", centos: "小哲" } },
+      // };
+      // var {
+      //   loc: {
+      //     linux: { centos: lala },
+      //   },
+      // } = node;
+      // var animals = [
+      //   // { cat: "加菲猫" },
+      //   {
+      //     bird: { num: 3, price: [100, 200, 300] },
+      //     dog: { color: "black" },
+      //   },
+      // ];
+      // console.log(lala);
+      // console.log(node?.loc?.linux?.ubantu);
+      // // var [
+      // //   {
+      // //     bird: { price },
+      // //   },
+      // // ] = animals;
+      // var [a, b] = animals;
+      // var {
+      //   bird: { price },
+      // } = a;
+      // console.log(a);
+      // // console.log(cat1);
+      // // console.log(animals);
+      // // console.log(bird);
+      // const result = price.map((num) => {
+      //   return num - 45;
+      // });
+      // console.log(result);
+    </script>
+  </body>
+</html>

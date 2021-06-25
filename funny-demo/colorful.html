@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .color-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 72px;
+      font-family: Helvetica;
+      color: #fff;
+      width: 400px;
+      height: 300px;
+      border-radius: 15px;
+      background-image: linear-gradient(limegreen, transparent), linear-gradient(90deg, skyblue, transparent), linear-gradient(-90deg, coral, transparent);
+      background-blend-mode: screen;
+      animation: fill 5s infinite linear alternate-reverse;
+    }
+
+    @keyframes fill {
+      0% {
+        filter: hue-rotate(0deg);
+      }
+
+      0% {
+        filter: hue-rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="color-box">colorful</div>
+</body>
+
+</html>

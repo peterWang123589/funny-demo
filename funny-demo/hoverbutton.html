@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      width: calc(200em / 36);
+      height: calc(150em / 36);
+      font-size: 36px;
+      border: 1px solid #000;
+      text-align: center;
+      color: #000;
+      line-height: calc(150em / 36);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      /* background-image: linear-gradient(37deg,
+          red 50%, transparent 50%, transparent); */
+    }
+
+    /* .box::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 0;
+      height: 100%;
+      background-color: hsla(180, 86%, 44%, 0.3);
+      transition: .2s all ease-in-out;
+    }
+
+    .box:hover::before {
+      left: 0;
+      width: 100%;
+    } */
+    .box::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      top: 0;
+      background-image: linear-gradient(37deg, hsla(180, 86%, 44%, 0.3) 50%, transparent 50%, transparent);
+      transition: .5s all ease-in-out;
+      transform-origin: 100% 100%;
+      transform: translate(-100%, 0);
+    }
+
+    .box:hover::before {
+      transform: translate(100%, 0) scale(2);
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="box">Hover Me</div>
+</body>
+
+</html>

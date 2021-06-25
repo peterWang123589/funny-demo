@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    div {
+      position: absolute;
+      width: 121.75px;
+      height: 170px;
+      background: url(../img/snowman.png);
+      animation: snowman steps(4) 0.5s infinite, move linear 2s forwards;
+    }
+
+    div:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes snowman {
+      0% {
+        background-position: 0 0;
+      }
+
+      100% {
+        background-position: -487px 0;
+      }
+    }
+
+    @keyframes move {
+      0% {
+        left: 0;
+        top: 50%;
+        transform: translate(0, -50%);
+      }
+
+      100% {
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div></div>
+</body>
+
+</html>

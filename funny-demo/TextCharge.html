@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #000;
+      min-height: 100vh;
+      flex-direction: column;
+    }
+
+    h2 {
+      --progress: 0;
+      font-family: Helvetica;
+      font-size: 30px;
+      width: 10em;
+      background-image: linear-gradient(to top, hsl(125, 100%, 85%) calc(var(--progress) * 100%), #fff calc(var(--progress) * 100%));
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+      transform: scale(clamp(1, calc((var(--progress) - 0.99) * 200), 1.2));
+      /* text-transform: uppercase; */
+      transform-origin: center bottom;
+      /* animation: 2s Charge linear infinite; */
+    }
+
+    .btn-group {
+      font-size: 10px;
+      width: 30em;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+
+
+    }
+
+    .btn-group .success,
+    .btn-group .start {
+      box-sizing: border-box;
+      width: 35%;
+      font-size: 3em;
+      /* padding: 0 1em; */
+      border: 0.1em solid #fff;
+      border-radius: 0.2em;
+      /* margin: 0 0.5em; */
+      text-align: center;
+      cursor: pointer;
+    }
+
+    /* @keyframes Charge {
+      from {
+        --progress: 0;
+
+      }
+
+      to {
+        --progress: 100
+      }
+     
+
+    } */
+  </style>
+
+
+</head>
+
+<body>
+  <h2>
+    To feel the flame of dreaming and to feel the moment of dancing,when all the romance is far away,the eternity is
+    always there
+  </h2>
+  <div class="btn-group">
+    <div class="start">0%</div>
+    <div class="success">100%</div>
+  </div>
+  <script>
+    var success = document.querySelector('.success');
+    var start = document.querySelector('.start')
+    var h2 = document.querySelector('h2')
+    let progress = 0
+    function Charge() {
+      if (progress < 1) {
+        progress = parseFloat((progress + 0.02).toFixed(2))
+        h2.style.setProperty('--progress', progress)
+        setTimeout(
+          Charge, 50);
+      }
+
+
+    }
+    success.addEventListener('click', function () {
+      Charge()
+    })
+    start.addEventListener('click', function () {
+      progress = 0
+      h2.style.setProperty('--progress', progress)
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="btn">发送下载请求</button>
+    <script>
+      var btn = document.querySelector("#btn");
+      url = `http://localhost/ajaxwork/imgs/mei.jpg?ran=${Math.random()}`;
+      async function download(url, params) {
+        const request = {
+          body: JSON.stringify(params),
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json;charset=UTF-8",
+            mode: "cors",
+          },
+        };
+        const res = await fetch(url, request);
+        const filename = res.headers
+          .get("content-disposition")
+          .spilt(";")[1]
+          .spilt("=")[1];
+        const blob = await res.blob();
+
+        const link = document.createElement("a");
+        link.download = decodeURIComponent(filename);
+        link.style.display = "none";
+        link.href = URL.createObjectURL(blob);
+        document.body.appendChild(link);
+        link.click();
+        URL.revokeObjectURL(link.href);
+        document.body.removeChild(link);
+      }
+      btn.onclick = download(url, { name: "zhangsan", password: "123456" });
+    </script>
+  </body>
+</html>

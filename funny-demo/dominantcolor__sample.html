@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      flex-direction: column;
+
+    }
+
+    .img-wrapper {
+      width: 400px;
+      height: 400px;
+      background-color: pink;
+      margin-bottom: 20px;
+      position: relative;
+
+    }
+
+    .img-wrapper img {
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+    }
+
+    .img-wrapper .next {
+
+      position: absolute;
+      width: 20px;
+      height: 50px;
+      background-image: linear-gradient(rgba(255, 255, 255, .8) 100%, transparent 0);
+      line-height: 50px;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      filter: blur(.5px);
+      text-align: center;
+      cursor: pointer;
+
+
+
+    }
+
+    .img-wrapper .prev {
+
+      position: absolute;
+      width: 20px;
+      height: 50px;
+      background-image: linear-gradient(rgba(255, 255, 255, .8) 100%, transparent 0);
+      line-height: 50px;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      filter: blur(.5px);
+      text-align: center;
+      cursor: pointer;
+
+
+
+
+    }
+
+    .dominant_colorshow {
+      display: flex;
+      width: 400px;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+
+    .dominant_colorshow .item {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin: 0 8px 8px 0;
+
+    }
+  </style>
+
+
+
+</head>
+
+<body>
+  <div class="img-wrapper">
+    <span class="prev">&lt;</span>
+    <span class="next">></span>
+    <img
+      src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f2e19f7c826b4c4dbd695255f43c6e42~tplv-k3u1fbpfcp-zoom-1.image"
+      alt="">
+
+  </div>
+  <div class="dominant_colorshow">
+
+  </div>
+  <script>
+    const colorThief = new ColorThief();
+
+    const img = document.querySelector('img') || false;
+    const imgurl_arr = ['https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bc536efdff8b4a7d9235f783ca883c37~tplv-k3u1fbpfcp-watermark.image',
+      'https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/de2e80a3b51147c0a54d08605723c2c8~tplv-k3u1fbpfcp-zoom-1.image',
+      'https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/936628e3cfd64275b6e92de15d862355~tplv-k3u1fbpfcp-zoom-1.image',
+      'https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/077f2cecf2b94a399fa4199e1dd8d333~tplv-k3u1fbpfcp-zoom-1.image',
+      'https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ec7774a7eafe417e95bbca98bfbf329e~tplv-k3u1fbpfcp-zoom-1.image']
+    const parent = document.querySelector('.dominant_colorshow')
+    // Make sure image is finished loading
+    if (img.complete) {
+      // const rgb_arr = colorThief.getColor(img);
+      // console.log(rgb_arr)
+      const palette_arr = colorThief.getPalette(img)
+      // console.log(palette_arr)
+    } else {
+      img.addEventListener('load', function () {
+        // const rgb_arr = colorThief.getColor(img);
+        // console.log(rgb_arr)
+        img.crossOrigin = 'Anonymous';
+        const palette_arr = colorThief.getPalette(img)
+        console.log(palette_arr)
+
+        palette_arr.forEach(([r, g, b]) => {
+          let item = document.createElement('div')
+          item.classList.add('item')
+          item.style.setProperty('background-color', `rgb(${r},${g},${b})`)
+          parent.appendChild(item)
+        })
+      });
+    }
+    let current = -1
+    document.querySelector('.img-wrapper .prev').addEventListener('click', function (e) {
+      parent.innerHTML = ``
+      if (current == -1 || current == 0) current = imgurl_arr.length
+
+      img.src = imgurl_arr[--current]
+
+
+
+    })
+    document.querySelector('.img-wrapper .next').addEventListener('click', function (e) {
+      parent.innerHTML = ``
+      if (current == (imgurl_arr.length - 1)) current = -1
+
+      img.src = imgurl_arr[++current]
+
+    })
+  </script>
+</body>
+
+</html>

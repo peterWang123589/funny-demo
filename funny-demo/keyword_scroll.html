@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/vue.js"></script>
+  <title>Document</title>
+  <style>
+    html {
+      font-size: 12px;
+      font-family: Helvetica;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+
+    }
+
+
+
+    input {
+      outline: none;
+      border-radius: 0.5rem;
+      font-size: 3rem;
+      padding: .5rem .8rem;
+      color: #ccc;
+      border: 3px solid #000;
+      /* font-family: inherit; */
+
+
+    }
+
+
+
+    label {
+      position: relative;
+      display: block;
+      overflow: hidden;
+
+
+    }
+
+    label::after,
+    label::before {
+      /* z-index: -1; */
+      position: absolute;
+      border: 3px solid transparent;
+      display: block;
+      font-size: 3rem;
+      width: 100%;
+      height: 100%;
+      padding: .5rem .8rem;
+      color: #ccc;
+      box-sizing: border-box;
+      /* font-family: inherit; */
+
+    }
+
+    label::before {
+      content: attr(data-before);
+    }
+
+    label::after {
+      content: attr(data-after);
+    }
+
+    @keyframes before {
+      0% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translateY(-100%);
+      }
+    }
+
+    @keyframes after {
+      0% {
+        opacity: 0;
+        transform: translateY(0);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(-100%);
+      }
+    }
+
+    .active::before {
+      animation: .5s before ease-in-out;
+    }
+
+    .active::after {
+      animation: .5s after ease-in-out;
+    }
+
+    .active::before,
+    .active::after {
+      animation-fill-mode: forwards;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <label for="tar" :data-before='before' :data-after='after' :class="{active:isActive}" @animationend='End'>
+      <input type="text" :placeholder="placeholder" @focus='isFocus=true' @blur="isFocus=false;checkText=''" id="tar"
+        v-model='checkText'>
+    </label>
+
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        keywords: [
+          'BOSE700消噪耳机',
+          '小米净水器',
+          'iphone12',
+          'HUWEI MATE40',
+          'Apple Watch5'
+        ],
+        isFocus: false,
+        currentIndex: 0,
+        animateflag: true,
+        checkText: ''
+
+      },
+      computed: {
+        before() {
+          var str = this.keywords[this.currentIndex]
+          return (this.isFocus) ? '' : str
+        },
+        after() {
+          return typeof this.keywords[this.currentIndex + 1] === "undefined" ? this.keywords[0] : this.keywords[this.currentIndex + 1]
+        },
+        placeholder() {
+          var str = this.keywords[this.currentIndex]
+          return (!this.isFocus) ? '' : str
+        },
+        // checkText(e) {
+        //   console.log(e.target)
+        // },
+        isActive() {
+          return !this.isFocus && this.animateflag && (this.checkText.trim() === '')
+        }
+      },
+      methods: {
+        End(e) {
+          // console.log(e.pseudoElement || 123)
+
+          if (e.pseudoElement === '::after') {
+            this.animateflag = false
+            let newIndex = typeof this.keywords[this.currentIndex + 1] === "undefined" ? 0 : this.currentIndex + 1
+            this.currentIndex = newIndex;
+          }
+          setTimeout(() => {
+            this.animateflag = true
+          }, 2000);
+
+        }
+      }
+    })
+
+  </script>
+
+</body>
+
+</html>

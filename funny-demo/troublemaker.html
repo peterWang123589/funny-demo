@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .cusor-wrapper {
+      position: absolute;
+      width: 600px;
+      height: 300px;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      transition: opacity .2s ease-in-out;
+      transform: scale(.5);
+    }
+
+    .cusor-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #eee;
+
+    }
+
+    .whole {
+      display: grid;
+      grid-template-columns: repeat(5, 40px);
+      grid-template-rows: repeat(5, 40px);
+      grid-gap: 1.5rem;
+    }
+
+    .whole .item {
+      background-color: #000;
+      border-radius: 5px;
+      box-shadow: 0 0 3px #000;
+      border-left: 10px solid #f00;
+      position: relative;
+    }
+
+    .whole .item::after,
+    .whole .item::before {
+      content: '';
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background-color: #fff;
+      left: 20px;
+    }
+
+    .whole .item::before {
+      bottom: 6px;
+    }
+
+    .whole .item::after {
+      top: 6px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cusor-wrapper">
+    <img src="./image/cusor.gif" alt="">
+  </div>
+  <div class="whole">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+  </div>
+  <script>
+    document.addEventListener('mousemove', (e) => {
+      let cx = e.clientX
+      let cy = e.clientY
+      console.log(cx, cy)
+      document.querySelectorAll('.whole .item').forEach(item => {
+        let ox = item.offsetLeft
+        let oy = item.offsetTop
+        let x = cx - ox
+        let y = cy - oy
+        const radius = Math.atan2(y, x)
+        const deg = radius * (180 / Math.PI)
+        item.style.setProperty('transform', `rotate(${deg}deg)`)
+      })
+      const img = document.querySelector('.cusor-wrapper')
+      const { width, height } = img.getBoundingClientRect()
+      console.log(width, height)
+      img.style.setProperty('opacity', `1`)
+      //本来应该是要cx-width/2的，因为.cusor-wrapper本身缩小为原来的0.5，所以鼠标较图片更偏左，所以要减去本身的宽度
+      //也要相应的扩大,高度的处理同理,-30是根据你自己微调的
+      img.style.setProperty('left', `${cx - (width)}px`)
+      img.style.setProperty('top', `${cy - (height) - 30}px`)
+    })
+  </script>
+</body>
+
+</html>

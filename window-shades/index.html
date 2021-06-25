@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #00cec9;
+      flex-direction: column;
+    }
+
+    .big_box {
+      width: 840px;
+      display: flex;
+      justify-content: center;
+      /* overflow: hidden; */
+    }
+
+    .small_box {
+      overflow: hidden;
+      transition: all .7s;
+    }
+
+    img {
+      width: 280px;
+    }
+
+    .small_box:hover {
+      flex-shrink: 0;
+      flex-grow: 0
+    }
+
+    h2 {
+      margin-bottom: 10vh;
+      font-family: Helvetica, sans-serif;
+      transform: translate(0, -5vw) scale(2.8);
+      color: #00cec9;
+      text-shadow: 0 0 10px rgba(255, 255, 255, .8);
+    }
+  </style>
+</head>
+
+<body>
+  <h2>百叶窗效果</h2>
+  <div class="big_box">
+    <div class="small_box"><img src="./img/1.gif" alt=""></div>
+    <div class="small_box"><img src="./img/2.gif" alt=""></div>
+    <div class="small_box"><img src="./img/3.gif" alt=""></div>
+    <div class="small_box"><img src="./img/4.gif" alt=""></div>
+    <div class="small_box"><img src="./img/5.gif" alt=""></div>
+    <div class="small_box"><img src="./img/6.gif" alt=""></div>
+    <div class="small_box"><img src="./img/7.gif" alt=""></div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <span>&times;</span>
+  <button class="need">单击这儿文本转语音</button>
+  <script>
+    var need = document.querySelector('.need');
+    need.addEventListener('click', function () {
+      // console.log(this)
+      // let p = new Promise(function (resolve, reject) {
+      //   setTimeout(() => {
+      //     resolve(speechSynthesis.getVoices())
+
+      //   }, 5000);
+      // })
+      // p.then(data => {
+      //   console.log(data)
+      //   var utterThis = new window.SpeechSynthesisUtterance('吴迪是王如斌儿子');
+      //   utterThis.voice = data[18]
+      //   utterThis.pitch = 2
+      //   utterThis.rate = 5
+      //   console.log(utterThis)
+      //   window.speechSynthesis.speak(utterThis);
+      // }).catch(error => { console.log(error) })
+      var utterThis = new window.SpeechSynthesisUtterance('Sure,Wudi is my son');
+      // utterThis.lang = 'en-US'
+      utterThis.pitch = 2
+      utterThis.rate = 0.8
+      window.speechSynthesis.speak(utterThis);
+
+    })
+
+
+  </script>
+</body>
+
+</html>

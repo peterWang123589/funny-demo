@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+
+
+  .hero-list {
+    list-style: none;
+    display: inline-flex;
+    height: 69px;
+  }
+
+  .hero-list li img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 5px;
+    width: 69px;
+    height: 69px;
+    transition: all .4s ease-in-out;
+  }
+
+  .hero-list li {
+    float: left;
+    position: relative;
+    margin-right: 10px;
+    width: 69px;
+    /* background-color: salmon; */
+    transition: all .4s ease-in-out;
+  }
+
+  .hero-list li img.short {
+    opacity: 1;
+  }
+
+  .hero-list li img.long {
+    opacity: 0;
+  }
+
+  .hero-list li.active img.short {
+    opacity: 0;
+  }
+
+  .hero-list li.active img.long {
+    opacity: 1;
+    width: 224px;
+  }
+
+  .hero-list li.active {
+    width: 224px;
+
+  }
+</style>
+
+<body>
+  <ul class="hero-list">
+
+    <li>
+      <img src="./img/a.jpg" alt="" class="short">
+      <img src="img/a.png" alt="" class="long">
+    </li>
+    <li>
+      <img src="./img/b.jpg" alt="" class="short">
+      <img src="img/b.png" alt="" class="long">
+
+    </li>
+    <li>
+      <img src="./img/c.jpg" alt="" class="short">
+      <img src="img/c.png" alt="" class="long">
+    </li>
+    <li>
+      <img src="./img/d.jpg" alt="" class="short">
+      <img src="img/d.png" alt="" class="long">
+    </li>
+    <li>
+      <img src="./img/e.jpg" alt="" class="short">
+      <img src="img/e.png" alt="" class="long">
+    </li>
+    <li>
+      <img src="./img/f.jpg" alt="" class="short">
+      <img src="img/f.png" alt="" class="long">
+    </li>
+    <li>
+      <img src="./img/g.jpg" alt="" class="short">
+      <img src="img/g.png" alt="" class="long">
+    </li>
+  </ul>
+  <script>
+    const lis = document.querySelectorAll('.hero-list li')
+    // console.log(lis)
+    lis.forEach(item => {
+
+      item.addEventListener('mouseover', () => {
+        lis.forEach(item => item.classList.remove('active'))
+        item.classList.add('active')
+      })
+    })
+    lis
+  </script>
+</body>
+
+</html>

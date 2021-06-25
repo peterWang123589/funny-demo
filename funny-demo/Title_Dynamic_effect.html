@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    :root {
+      font-size: 15px;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: Helvetica;
+      flex-direction: column;
+    }
+
+    h2 {
+      font-size: 6rem;
+    }
+
+    h2 span {
+      display: inline-block;
+      /* animation: .4s jump ease-in-out;
+      animation-delay: var(--delay); */
+    }
+
+    h2.animate span {
+      animation-name: var(--animation);
+      animation-duration: .4s;
+      animation-timing-function: ease-in-out;
+      animation-delay: var(--delay);
+    }
+
+    @keyframes jump {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-1rem);
+      }
+    }
+
+    @keyframes pop {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.2);
+      }
+    }
+
+    @keyframes flip {
+
+      0%,
+      100% {
+        transform: rotateY(0deg);
+      }
+
+      50% {
+        transform: rotateY(90deg);
+      }
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        color: initial;
+      }
+
+      50% {
+        color: yellow;
+      }
+    }
+
+    button {
+      display: inline-block;
+      font-size: 3rem;
+      margin: 5px;
+      background-color: #4834d4;
+      border-radius: 5px;
+      outline: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+
+    }
+  </style>
+</head>
+
+<body>
+  <h2>WangRuBin</h2>
+  <button data-animation='jump'>jump</button>
+  <button data-animation='pop'>pop</button>
+  <button data-animation='flip'>flip</button>
+  <button data-animation='blink'>blink</button>
+  <script>
+    const h2 = document.querySelector('h2')
+    h2.innerHTML = h2.textContent.replace(/\S/g, "<span>$&</span>")
+    const spans = document.querySelectorAll('h2 span')
+    spans.forEach((item, index) => {
+      item.style.setProperty('--delay', `${index * 0.1}s`)
+    })
+    const button = document.querySelectorAll('button')
+    button.forEach((item, index) => {
+      item.addEventListener('click', function (e) {
+        h2.style.setProperty('--animation', e.target.getAttribute('data-animation'))
+
+        //void h2.offsetHeight使页面强行reflow,因为这儿刚加上animate类就立即将它移除，浏览器认为这消耗性能就没去执行
+        h2.classList.remove('animate')
+        void h2.offsetHeight
+        h2.classList.add('animate')
+      })
+    })
+
+  </script>
+</body>
+
+</html>

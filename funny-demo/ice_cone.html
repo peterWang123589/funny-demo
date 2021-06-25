@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      perspective: 500px;
+      /* perspective-origin: right; */
+
+    }
+
+    .wrapper {
+      --distanceX: 0px;
+      --distanceY: 0px;
+      --border-color: #6c5ce7;
+      width: 50px;
+      height: 50px;
+      transform-style: preserve-3d;
+      position: relative;
+      /* transform: rotateY(30deg); */
+      animation: rotate 3.5s ease-in infinite;
+      /* , go-in 3s linear infinite */
+      /* transform: rotateY(30deg) rotateZ(0) translateZ(-500px) translateX(var(--distance)); */
+      background-color: #74b9ff;
+    }
+
+    .wrapper .center {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      top: 0;
+      /* background: cyan; */
+      background-color: #0984e3;
+      width: inherit;
+      height: inherit;
+    }
+
+    .wrapper .left {
+      position: absolute;
+      /* background: red; */
+      background-color: inherit;
+      /* left: -100%; */
+      transform: translateX(-100%) rotateY(97.125deg);
+      width: 201.556px;
+      height: 50px;
+      clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+      transform-origin: right center;
+      box-shadow: 0 0 50px var(--border-color) inset;
+
+
+    }
+
+    .wrapper .right {
+      position: absolute;
+      /* background: yellow; */
+      background-color: inherit;
+      /* left: -100%; */
+      transform: translateX(50px) rotateY(-97.125deg);
+      width: 201.556px;
+      height: 50px;
+      clip-path: polygon(100% 50%, 0% 0%, 0% 100%);
+      transform-origin: left center;
+      box-shadow: 0 0 50px var(--border-color) inset;
+    }
+
+    .wrapper .top {
+      position: absolute;
+      /* background: green; */
+      background-color: inherit;
+      /* left: -100%; */
+      transform: translateY(-100%) rotateX(-97.125deg);
+      width: 50px;
+      height: 201.556px;
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      transform-origin: bottom center;
+      box-shadow: 0 0 50px var(--border-color) inset;
+
+    }
+
+    .wrapper .bottom {
+      position: absolute;
+      /* background: purple; */
+      background-color: inherit;
+      /* left: -100%; */
+      transform: translateY(50px) rotateX(97.125deg);
+      width: 50px;
+      height: 201.556px;
+      clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+      transform-origin: top center;
+      box-shadow: 0 0 50px var(--border-color) inset;
+
+    }
+
+    @keyframes rotate {
+      from {
+        transform: translateZ(-1500px) translateX(var(--distanceX)) translateY(var(--distanceY)) rotateY(35deg) rotateZ(0) scale(0.5);
+      }
+
+      to {
+        transform: translateZ(0px) translateX(var(--distanceX)) translateY(var(--distanceY)) rotateY(35deg) rotateZ(360deg) scale(0.5);
+      }
+    }
+
+    @keyframes go-in {
+      from {
+        transform: translateZ(-500px);
+      }
+
+      to {
+        transform: translateZ(300px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="center"></div>
+    <div class="left"></div>
+    <div class="right"></div>
+    <div class="top"></div>
+    <div class="bottom"></div>
+  </div>
+  <div class="wrapper" style="--distanceX:-100px;--distanceY:350px;animation-delay: 0.1;">
+    <div class="center"></div>
+    <div class="left"></div>
+    <div class="right"></div>
+    <div class="top"></div>
+    <div class="bottom"></div>
+  </div>
+  <div class="wrapper" style="--distanceX:300px;--distanceY:80px;animation-delay: 0.2;">
+    <div class="center"></div>
+    <div class="left"></div>
+    <div class="right"></div>
+    <div class="top"></div>
+    <div class="bottom"></div>
+  </div>
+</body>
+
+</html>

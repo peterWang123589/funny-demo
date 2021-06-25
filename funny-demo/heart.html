@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      align-items: center;
+      transform: scale(0.15);
+    }
+
+    svg {
+      width: 250px;
+      height: 250px;
+      position: relative;
+      z-index: 999;
+    }
+
+    #heart {
+      fill: #eee;
+      /* stroke-width: 6px; */
+      stroke: red;
+      stroke-width: 20px;
+      stroke-dasharray: 3600;
+      stroke-dashoffset: 3600;
+      stroke-linecap: round;
+    }
+
+    .circle,
+    .circle::after {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: transparent;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      box-shadow: 250px 0 0 red, -250px 0 0 red, 0 250px 0 red, 0 -250px 0 red;
+    }
+
+    .circle::after {
+      content: "";
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    input[type="checkbox"] {
+      display: none;
+    }
+
+    label {
+      cursor: pointer;
+    }
+
+    input[type="checkbox"]:checked+svg #heart {
+      animation: 1s heartStream linear forwards;
+    }
+
+    input[type="checkbox"]:checked~.circle {
+      animation: 0.5s show linear forwards 0.75s;
+    }
+
+    input[type="checkbox"]:checked~svg {
+      animation: 1s updown linear forwards;
+    }
+
+    @keyframes heartStream {
+      0% {
+        stroke-dashoffset: 3600;
+      }
+
+      80% {
+        stroke-dashoffset: 0;
+        fill: #eee;
+      }
+
+      100% {
+        stroke-dashoffset: 0;
+        fill: red;
+      }
+    }
+
+    @keyframes show {
+      0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0.8;
+      }
+
+      50% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.8;
+      }
+
+      100% {
+        transform: translate(-50%, -50%) scale(1.1);
+        opacity: 0;
+      }
+    }
+
+    @keyframes updown {
+      0% {
+        transform: scale(1);
+      }
+
+      70% {
+        transform: scale(1);
+      }
+
+      80% {
+        transform: scale(1.2);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <label for="qq">
+    <input type="checkbox" name="" id="qq" />
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" t="1601733146069" class="icon"
+      viewBox="0 0 1169 1024" version="1.1" p-id="3273" width="228.3203125" height="200">
+      <defs>
+        <style type="text/css" /></defs>
+        <path
+          id="heart"
+          d="M1066.666667 102.4c-136.533333-128-341.333333-136.533333-477.866667-8.533333-145.066667-128-349.866667-119.466667-486.4 8.533333-136.533333 136.533333-136.533333 349.866667 0 486.4l401.066667 401.066667c42.666667 42.666667 110.933333 42.666667 153.6 0l401.066666-401.066667c145.066667-128 145.066667-349.866667 8.533334-486.4z m-51.2 435.2L614.4 938.666667c-17.066667 17.066667-34.133333 17.066667-51.2 0L153.6 537.6C42.666667 435.2 42.666667 256 153.6 153.6 256 51.2 426.666667 51.2 537.6 145.066667l51.2 42.666666 51.2-42.666666C750.933333 42.666667 913.066667 51.2 1024 153.6c93.866667 110.933333 93.866667 281.6-8.533333 384z"
+          fill="#1296db"
+          p-id="3274"
+        />
+      </svg>
+      <div class="circle"></div>
+    </label>
+  </body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* .quar-radius {
+      width: 96px;
+      height: 96px;
+      border-radius: 0 0 50% 0;
+
+      clip-path: polygon(0% 0%, 100% 0, 100% 100%, 0% 100%);
+      box-shadow: 0 0 0 100px teal;
+外圆角标签
+    } */
+    html {
+      font-size: 100px;
+    }
+
+    body {
+      display: flex;
+      min-height: 100vh;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .quar-body {
+      position: relative;
+      --radius: .5rem;
+      width: 2rem;
+      height: 1rem;
+      background-color: teal;
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+
+    .quar-body::before {
+      content: '';
+      position: absolute;
+      left: -0.96rem;
+      bottom: 0;
+      width: .96rem;
+      height: .96rem;
+      border-radius: 0 0 50% 0;
+
+      clip-path: polygon(0% 0%, 100% 0, 100% 100%, 0% 100%);
+      box-shadow: 0 0 0 1rem teal;
+    }
+
+    .quar-body::after {
+      content: '';
+      position: absolute;
+      right: -0.96rem;
+      bottom: 0;
+      width: .96rem;
+      height: .96rem;
+      border-radius: 0 0 0 50%;
+
+      clip-path: polygon(0% 0%, 100% 0, 100% 100%, 0% 100%);
+      box-shadow: 0 0 0 1rem teal;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="quar-body"></div>
+</body>
+
+</html>

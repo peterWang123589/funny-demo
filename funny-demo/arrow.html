@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .box {
+      width: 200px;
+      height: 100px;
+      background: pink;
+      clip-path: polygon(0% 40%, 60% 40%, 60% 0, 100% 50%, 60% 100%, 60% 60%, 0% 60%);
+      /* outline: 1px solid #000; */
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box"></div>
+</body>
+
+</html>

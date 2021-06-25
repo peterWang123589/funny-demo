@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style type="text/css">
+      .container {
+        display: flex;
+        height: 500px;
+        width: 500px;
+      }
+      .color {
+        width: 40px;
+        height: 40px;
+      }
+      .text,
+      .tex1 {
+        padding-left: 20px;
+        font-family: helvetica;
+      }
+      .container .text1 {
+        padding-left: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="can"></canvas>
+    <input type="file" id="file" />上传
+    <div class="container">
+      <div class="color"></div>
+      <div class="text"></div>
+      <div class="text1"></div>
+    </div>
+    <script>
+      var url = "";
+      var file = document.querySelector("#file");
+      // console.log(file);
+      var img = new Image();
+      file.addEventListener("change", (e) => {
+        // console.log(this);
+        var reader = new FileReader();
+        reader.onload = (event) => {
+          url = event.target.result;
+
+          img.src = url;
+          // console.log(url);
+        };
+        reader.readAsDataURL(e.target.files[0]);
+      });
+      // var img = new Image();
+      // console.log(url);
+
+      // console.log(img);
+      var canvas = document.querySelector("#can");
+      var color = document.querySelector(".color");
+      var text = document.querySelector(".text");
+      var text1 = document.querySelector(".text1");
+      canvas.width = 400;
+      canvas.height = 400;
+      var ctx = canvas.getContext("2d");
+      img.onload = () => {
+        ctx.drawImage(img, 0, 0, 400, 400);
+      };
+      canvas.addEventListener("mousemove", pick);
+      function pick(e) {
+        var x = e.layerX;
+        var y = e.layerY;
+        var each = ctx.getImageData(x, y, 1, 1);
+        var data = each.data;
+        var rgb = `rgb(${data[0]},${data[1]},${data[2]})`;
+        var rgb16 =
+          `#` +
+          `${data[0].toString(16)}` +
+          `${data[1].toString(16)}` +
+          `${data[2].toString(16)}`;
+        color.style.background = rgb;
+        text.innerHTML = rgb;
+        text1.innerHTML = rgb16;
+      }
+    </script>
+  </body>
+</html>

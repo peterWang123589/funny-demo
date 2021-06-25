@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../echarts.min.js"></script>
+    <style type="text/css">
+      div {
+        width: 500px;
+        height: 400px;
+        background-color: pink;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box"></div>
+    <script>
+      var box = document.getElementById("box");
+      var mychart = echarts.init(box);
+      var option = {
+        title: {
+          text: "张三李四对比表",
+          left: "center",
+        },
+        legend: {
+          data: ["张三", "李四"],
+          right: "0%",
+          textStyle: { color: "purple" },
+        },
+        xAxis: {
+          type: "category",
+          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          axisLine: { show: false },
+          axisTick: { show: false },
+        },
+        yAxis: {
+          type: "value",
+          axisLine: { show: false },
+          axisTick: { show: false },
+        },
+        series: [
+          {
+            name: "张三",
+            data: [120, 200, 150, 80, 70, 110, 130],
+            type: "bar",
+            backgroundStyle: {
+              color: "rgba(220, 220, 220, 0.8)",
+            },
+            itemStyle: {
+              barBorderRadius: 5,
+            },
+            label: {
+              normal: { show: true, position: "top", color: "yellow" },
+            },
+          },
+          {
+            name: "李四",
+            data: [100, 215, 155, 70, 70, 120, 132],
+            type: "bar",
+            backgroundStyle: {
+              color: "rgba(120, 250, 120, 0.8)",
+            },
+            itemStyle: {
+              barBorderRadius: 5,
+            },
+            label: {
+              normal: { show: true, position: "top", color: "yellow" },
+            },
+          },
+        ],
+      };
+      mychart.setOption(option);
+    </script>
+  </body>
+</html>

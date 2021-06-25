@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    :root {
+      font-size: 20px;
+      --size: 6rem
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-size: var(--size);
+      font-family: monospace;
+      /* monspace是等宽字体 */
+      padding: 0;
+      margin: 0;
+      /* width: 4ch;
+      overflow: hidden; */
+      position: relative;
+      /* width: 20ch; */
+    }
+
+    /* h1 span:last-child {
+      position: relative;
+      overflow: visible;
+    } */
+
+    /* h1 span:last-child::after {
+      content: '';
+      position: absolute;
+      width: 15px;
+      height: 1rem;
+      right: -30px;
+      left: 1ch;
+      background-color: #000;
+      display: inline-block;
+    } */
+
+    h1::after {
+      content: '';
+      position: absolute;
+      width: 15px;
+      height: var(--size);
+      right: -30px;
+      background-color: #000;
+      display: inline-block;
+
+    }
+
+    h1 span {
+      --delay: 999s;
+      --step: 0.25s;
+      display: inline-block;
+      width: 0ch;
+      overflow: hidden;
+      animation: var(--step) text-in ease-in-out forwards;
+      animation-delay: var(--delay);
+    }
+
+    h1.end::after {
+      animation: 1.1s blink steps(2, jump-none) infinite;
+    }
+
+    /* h1 span:last-child.end::after {
+      animation: 1.1s blink steps(2, jump-none) infinite;
+    } */
+
+    @keyframes blink {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes text-in {
+      from {
+        width: 0ch;
+      }
+
+      to {
+        width: 1ch;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- <h1>WangRuBin</h1> -->
+  <!-- <h1>王如斌</h1> -->
+  <h1>I Love You!</h1>
+  <script>
+    let delay = 0
+    //step表示敲一个字所需的时间
+    const step = 0.25
+    const stopdot = step * 1.5
+    const h1 = document.querySelector('h1')
+    const spanlast = document.querySelector('h1 span:last-child ')
+    h1.innerHTML = h1.textContent.replace(/\S/g, "<span>$&</span>")
+    document.querySelectorAll('span').forEach((item, index) => {
+      delay += step
+      //大写字母的时候停顿一会儿，再敲
+      if (/[A-Z]/.test(item.textContent)) {
+        delay += stopdot
+      }
+      item.style.setProperty('--delay', `${delay}s`)
+    })
+    //监听最后一个字敲完，再闪烁光标
+    h1.addEventListener('animationend', (e) => {
+      if (e.target === document.querySelector('h1 span:last-child')) {
+        h1.classList.add('end')
+
+      }
+    })
+  </script>
+</body>
+
+</html>

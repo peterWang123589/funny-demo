@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      position: relative;
+      margin: 15px;
+    }
+
+    body {
+      background: #fff;
+    }
+
+    .prettyinput {
+
+      font-size: 16px;
+      outline: none;
+      height: 3.6em;
+      width: 25em;
+      line-height: 3em;
+      box-sizing: border-box;
+      padding-left: 0.5em;
+      border-radius: 1em;
+      border: 1px solid hsl(0, 0%, 30%);
+      /* outline: 1px dashed #000; */
+    }
+
+    /* .input:not(:placeholder-shown) {
+      font-style: italic;
+      text-transform: uppercase;
+      color: hsl(215, 95%, 56%);
+    } */
+    .prettyinput:placeholder-shown::placeholder {
+      color: transparent;
+    }
+
+    .prettyinput:focus {
+      border: 1px solid hsl(38, 95%, 36%);
+      ;
+    }
+
+    .box .mark {
+      position: absolute;
+      font-size: 16px;
+      height: 2em;
+      line-height: 2em;
+      padding: 0 0.3em;
+      left: 1em;
+      top: calc(50% - 1em);
+      transition: all .25s;
+      transform-origin: 0.5 0.5;
+      pointer-events: none;
+
+    }
+
+    .prettyinput:focus~.mark,
+    .prettyinput:not(:placeholder-shown)~.mark {
+      transform: translate(0, -1.8em) scale(0.75);
+      color: hsl(38, 95%, 36%);
+      background-color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <input type="text" placeholder="邮箱" class="prettyinput">
+    <label for="" class="mark">邮箱</label>
+  </div>
+  <div class="box">
+    <input type="text" placeholder="用户名" class="prettyinput">
+    <label for="" class="mark">用户名</label>
+  </div>
+  <div class="box">
+    <input placeholder="密码" class="prettyinput" type="password">
+    <label for="" class="mark">密码</label>
+  </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      background: yellow;
+    }
+
+    button,
+    button::after {
+      width: 30vw;
+      height: 10vh;
+      text-align: center;
+      line-height: 10vh;
+      font-family: Helvetica;
+      font-size: 2rem;
+      color: #ffffff;
+      border: 0;
+      outline: transparent;
+      background: linear-gradient(45deg, transparent 3%, #10ac84 3%, #10ac84 5%, red 5%);
+      box-shadow: 6px 0 0 #10ac84;
+      position: relative;
+    }
+
+    button::after {
+      --slice1: inset(80% -6px 0 0);
+      --slice2: inset(60% -6px 15% 0);
+      --slice3: inset(40% -6px 35% 0);
+      --slice4: inset(30% -6px 45% 0);
+      --slice5: inset(10% -6px 70% 0);
+      --slice6: inset(50% 50% 50% 50%);
+      display: block;
+      position: absolute;
+      content: '2077Button';
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      text-shadow: 3px 3px 0#fff200, -3px -3px 0 #01a3a4;
+      clip-path: var(--slice6);
+      /* transform: translate(-20px, 30px); */
+
+    }
+
+    button:hover::after {
+      animation: bug 1s;
+      animation-timing-function: steps(2, end)
+    }
+
+    @keyframes bug {
+      0% {
+        clip-path: var(--slice1);
+        transform: translate(10px, 0);
+      }
+
+      10% {
+        clip-path: var(--slice3);
+        transform: translate(-5px, 10px);
+      }
+
+      20% {
+        clip-path: var(--slice4);
+        transform: translate(-5px, -5px);
+      }
+
+      30% {
+        clip-path: var(--slice1);
+        transform: translate(15px, -20px);
+      }
+
+      40% {
+        clip-path: var(--slice2);
+        transform: translate(15px, -10px);
+      }
+
+      50% {
+        clip-path: var(--slice5);
+        transform: translate(-15px, 20px);
+      }
+
+      60% {
+        clip-path: var(--slice3);
+        transform: translate(15px, -22px);
+      }
+
+      70% {
+        clip-path: var(--slice4);
+        transform: translate(-18px, 13px);
+      }
+
+      80% {
+        clip-path: var(--slice1);
+        transform: translate(-13px, -16px);
+      }
+
+      90% {
+        clip-path: var(--slice5);
+        transform: translate(17px, 13px);
+      }
+
+      100% {
+        clip-path: var(--slice4);
+        transform: translate(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <button>2077Button</button>
+</body>
+
+</html>

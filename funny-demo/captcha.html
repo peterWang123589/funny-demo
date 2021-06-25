@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    #captcha {
+      --width: 400px;
+      --height: 260px;
+      --piece-w: 80px;
+      --piece-h: 80px;
+      --moved: 0px;
+      display: block;
+      width: var(--width);
+      height: var(--height);
+      border-radius: 4px;
+      background-image: url(https://images.unsplash.com/photo-1488900128323-21503983a07e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDV8fGZvb2R8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60);
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, .3);
+    }
+
+    #captcha::after,
+    #captcha::before {
+      position: absolute;
+      content: '';
+      display: block;
+      width: inherit;
+      height: inherit;
+      background-image: inherit;
+      /* background-color: pink; */
+      background-size: inherit;
+      background-position: inherit;
+      -webkit-clip-path: inset(calc((var(--height) - var(--piece-h)) / 2) var(--piece-w) calc((var(--height) - var(--piece-h)) / 2) calc(var(--width) - var(--piece-w) * 2));
+      clip-path: inset(calc((var(--height) - var(--piece-h)) / 2) var(--piece-w) calc((var(--height) - var(--piece-h)) / 2) calc(var(--width) - var(--piece-w) * 2));
+
+
+    }
+
+    #captcha::after {
+      transform: translateX(clamp(calc(var(--width) * -1), calc(var(--width) * -1 + var(--moved)), var(--piece-w)));
+      transition: .25s all ease-in-out;
+    }
+
+    #captcha::before {
+      background-color: rgba(0, 0, 0, .6);
+      background-blend-mode: multiply;
+    }
+
+    #handle {
+      width: calc(var(--width) + var(--piece-w) * 2);
+      height: 30px;
+      border-radius: 18px;
+      background-color: #eee;
+      position: absolute;
+      bottom: -50px;
+      left: calc(var(--piece-w) * -2);
+      box-shadow: 0 0 12px rgba(0, 0, 0, .2) inset;
+      border: 3px solid #ccc;
+    }
+
+    #handle span {
+      display: block;
+      width: var(--piece-w);
+      height: inherit;
+      border-radius: inherit;
+      background-color: #fff;
+      box-shadow: 0 0 6px rgba(0, 0, 0, .25) inset, 0 2px 4px rgba(0, 0, 0, .3);
+      cursor: move;
+      position: absolute;
+      transform: translateX(clamp(0px, var(--moved), calc(var(--width) + var(--piece-w))));
+      transition: .25s all ease-in-out;
+      /* //验证失败后滚动条缓慢归零 */
+    }
+
+    #captcha.passed::before,
+    #captcha.passed::after,
+    #captcha.passed #handle {
+      opacity: 0;
+    }
+
+    #captcha:active #handle span,
+    #captcha:active::after {
+      transition: none;
+      /*使得拖拽过程中不具备效果*/
+
+    }
+
+    /* #handle:active {
+      background-color: palegoldenrod;
+      用于验证自己的猜想，事实证明子元素激活会影响到父级元素甚至祖级元素
+    } */
+  </style>
+</head>
+
+<body>
+  <div id="captcha">
+    <div id="handle"><span></span></div>
+  </div>
+  <script>
+    let flag = false
+    const captcha = document.querySelector('#captcha')
+    const handle = document.querySelector('#handle')
+    const button = document.querySelector('#handle span')
+    button.addEventListener('mousedown', (e) => {
+      flag = true
+    })
+    window.addEventListener('mousemove', (e) => {
+      if (flag) {
+        const offset = handle.getBoundingClientRect().left
+        const buttonWidth = button.getBoundingClientRect().width
+        captcha.style.setProperty('--moved', `
+       ${e.clientX - offset - buttonWidth / 2}px`)
+      }
+    })
+    window.addEventListener('mouseup', (e) => {
+      if (flag) {
+        const error_range = e.clientX - handle.getBoundingClientRect().left
+        console.log(error_range)   //440.39999771118164较精准填坑值
+        if (error_range >= 435 && error_range <= 445) {
+          captcha.classList.add('passed')
+        } else {
+          captcha.style.setProperty('--moved', '0px')
+        }
+      }
+      flag = false
+    })
+  </script>
+</body>
+
+</html>

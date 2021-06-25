@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      min-height: 100vh;
+      flex-wrap: wrap;
+    }
+
+    /* 下面这两种优惠券都是通过mask重复平铺实现的 */
+    .coupon-doublesides {
+      width: 400px;
+      height: 300px;
+      background-color: #10ac84;
+      -webkit-mask: radial-gradient(circle at 30px center, transparent 30px, red 31px);
+      -webkit-mask-position: -30px 0;
+      text-align: center;
+      line-height: 6;
+      font-size: 50px;
+      color: #f1f2f6;
+
+    }
+
+    .coupon-corners {
+      width: 400px;
+      height: 300px;
+      background-color: #10ac84;
+      -webkit-mask: radial-gradient(circle at 30px 30px, transparent 30px, red 31px);
+      -webkit-mask-position: -30px -30px;
+      text-align: center;
+      line-height: 6;
+      font-size: 50px;
+      color: #f1f2f6;
+    }
+
+    .coupon-allcorners {
+      /* 在coupon-corners类的基础上改变mask-size */
+      width: 400px;
+      height: 300px;
+      background-color: #10ac84;
+      -webkit-mask: radial-gradient(circle at 30px 30px, transparent 30px, red 31px);
+      -webkit-mask-position: -30px -30px;
+      -webkit-mask-size: 50% 100%;
+      text-align: center;
+      line-height: 6;
+      font-size: 50px;
+      color: #f1f2f6;
+    }
+
+    .coupon-sidescorners {
+      width: 400px;
+      height: 300px;
+      background-color: #10ac84;
+      -webkit-mask: radial-gradient(circle at 20px center, transparent 20px, red 21px);
+      -webkit-mask-position: -20px 0;
+      -webkit-mask-size: 100% 60px;
+      text-align: center;
+      line-height: 6;
+      font-size: 50px;
+      color: #f1f2f6;
+      /* -webkit-mask-repeat: repeat-x; */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="coupon-doublesides">满100减20</div>
+  <div class="coupon-corners">满200减100</div>
+  <div class="coupon-sidescorners">满300减250</div>
+  <div class="coupon-allcorners">满500减450</div>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .box {
+      width: 400px;
+      height: 400px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-rows: 25% 25% 25% 25%;
+      background-color: pink;
+      grid-template-areas: 'a a b b'
+        'a a b b'
+        'c c b b'
+        'c c d d ';
+    }
+
+    .box [class='child']:nth-of-type(1) {
+      grid-area: a;
+      /* clip-path: polygon(25% 0%, 75% 0, 100% 100%, 50% 102%, 0% 100%); */
+      clip-path: polygon(0% 0%, 0% 100%, 25% 0%, 75% 0%, 100% 100%, 100% 0%, 0% 0%);
+      background-color: blue;
+      /* transform: translate(0, -50%); */
+    }
+
+    .box [class='child']:nth-of-type(2) {
+      grid-area: b;
+    }
+
+    .box [class='child']:nth-of-type(3) {
+      grid-area: c;
+    }
+
+    .box [class='child']:nth-of-type(4) {
+      grid-area: d;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <div class="child"></div>
+    <div class="child"></div>
+    <div class="child"></div>
+    <div class="child"></div>
+  </div>
+</body>
+
+</html>

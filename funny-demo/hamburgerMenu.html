@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: #000;
+    }
+
+    #toggler {
+      display: none;
+    }
+
+    #toggler:checked+label .box {
+      background-color: crimson;
+    }
+
+    .hamburger-container {
+      width: 40px;
+      height: 40px;
+      display: block;
+      position: relative;
+      top: 12px;
+    }
+
+    .hamburger-container span {
+      height: 3px;
+      display: block;
+      background-color: #fff;
+      position: relative;
+      transition: transform .3s ease-in-out, top .3s ease-in-out .3s;
+      top: 0px;
+    }
+
+    #toggler:checked+label .hamburger-container span:nth-child(1) {
+      transform: rotate(45deg);
+
+      top: 5.5px;
+      transition: top .3s ease-in-out, transform .3s ease-in-out .3s;
+    }
+
+    .hamburger-container span:nth-child(2) {
+      margin-top: 10px;
+
+    }
+
+    #toggler:checked+label .hamburger-container span:nth-child(2) {
+      transform: rotate(-45deg);
+      transition: top .3s ease-in-out, transform .3s ease-in-out .3s;
+      top: -5.5px;
+    }
+
+
+    header {
+      height: 66px;
+      background-color: #000;
+      padding: 15px 18px;
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-items {
+      position: absolute;
+      width: 100%;
+      top: 66px;
+      height: 100vh;
+      font-size: 30px;
+      background-color: #7f8fa6;
+      transform: scaleY(0);
+      transform-origin: 50% 0;
+      transition: .3s transform ease-in-out .3s;
+      right: 0;
+
+    }
+
+    .nav-items li {
+      padding: 2vh 0;
+      position: relative;
+      left: 8vh;
+    }
+
+    #toggler:checked~.nav-items {
+      transform: scaleY(1);
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <input type="checkbox" id='toggler'>
+    <label for="toggler">
+      <!-- <div class="box"></div> -->
+      <div class="hamburger-container">
+        <span></span>
+        <span></span>
+      </div>
+    </label>
+
+    <ul class="nav-items">
+      <li>🙌</li>
+      <li>🎉</li>
+      <li>💅</li>
+      <li>😅</li>
+      <li>💖</li>
+      <li>🦜</li>
+      <li>👾</li>
+      <li>🍒</li>
+      <li>🚀</li>
+      <li>👺</li>
+    </ul>
+
+  </header>
+
+</body>
+
+</html>

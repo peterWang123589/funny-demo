@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      font-size: 15px;
+    }
+
+    body {
+
+      display: flex;
+      min-height: 100vh;
+      justify-content: center;
+      align-items: flex-end;
+      width: 100%;
+    }
+
+    .background {
+      width: 100%;
+      height: 8rem;
+      display: flex;
+      justify-content: center;
+      background-color: cornsilk;
+    }
+
+    .dock {
+      --scale: 1;
+      display: flex;
+      list-style: none;
+      /* background-color: cornsilk; */
+      width: 80%;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .dock li {
+      font-size: calc(5rem * var(--scale));
+      padding: 0.5rem;
+      cursor: default;
+      position: relative;
+      /* 计算图标相对于放大后的位移 */
+      top: calc((5rem * var(--scale) - 5rem) / 2 * -1);
+      transition: 15ms all ease-out;
+      /* outline: 1px solid #000; */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="background">
+    <ul class="dock">
+      <li>🙌</li>
+      <li>🎉</li>
+      <li>💅</li>
+      <li>😅</li>
+      <li>💖</li>
+      <li>🦜</li>
+      <li>👾</li>
+      <li>🍒</li>
+      <li>🚀</li>
+      <li>👺</li>
+    </ul>
+  </div>
+  <script>
+    const lis = document.querySelectorAll("li")
+    lis.forEach(item => {
+      item.addEventListener('mousemove', e => {
+        let li = e.target
+        let liRect = li.getBoundingClientRect()
+        let offset = Math.abs(e.clientX - liRect.left) / liRect.width
+
+        let prev = li.previousElementSibling || null
+        let next = li.nextElementSibling || null
+        let prev_prev = prev.previousElementSibling || null
+        let next_next = next.nextElementSibling || null
+        let scale = 0.6
+        if (prev) {
+          prev.style.setProperty('--scale', 1 + scale * Math.abs(offset - 1))
+        }
+        li.style.setProperty('--scale', 1 + scale)
+        if (next) {
+          next.style.setProperty('--scale', 1 + scale * offset)
+        }
+        // if (prev_prev) {
+        //   prev_prev.style.setProperty('--scale', 1 + scale * Math.abs(offset - 1) * Math.abs(offset - 1))
+        // }
+        // if (next_next) {
+        //   next_next.style.setProperty('--scale', 1 + scale * offset * offset)
+        // }
+      })
+    })
+    document.querySelector('.dock').addEventListener('mouseleave', e => {
+      resetScale()
+    })
+    function resetScale() {
+      document.querySelectorAll('.dock li').forEach(item => {
+        item.style.setProperty('--scale', 1)
+      })
+    }
+
+  </script>
+</body>
+
+</html>

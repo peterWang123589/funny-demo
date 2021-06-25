@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style type="text/css">
+      .container {
+        width: 60%;
+        height: 300px;
+        margin: 20px auto;
+        background: #000;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+      }
+      .container .items {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background-color: #fff;
+        margin: 0px 10px 0px 10px;
+        animation: jumpturn 1s ease-in-out infinite;
+        transition: all 1.5s;
+      }
+      .container .item1 {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin: 0px 10px 0px 10px;
+        background-color: purple;
+      }
+      .container .item2 {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin: 0px 10px 0px 10px;
+        background-color: brown;
+        animation-delay: 0.1s;
+      }
+      .container .item3 {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin: 0px 10px 0px 10px;
+        background-color: paleturquoise;
+        animation-delay: 0.2s;
+      }
+      .container .item4 {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin: 0px 10px 0px 10px;
+        background-color: palegreen;
+        animation-delay: 0.3s;
+      }
+      .container .item5 {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin: 0px 10px 0px 10px;
+        background-color: gold;
+        animation-delay: 0.4s;
+      }
+      @keyframes jumpturn {
+        40%,
+        60% {
+          transform: translateY(-50px);
+        }
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+      }
+      button {
+        display: block;
+        width: 100px;
+        height: 100px;
+        background-color: blueviolet;
+        border-radius: 50%;
+        margin: 0 auto;
+        font-family: Helvetica;
+        text-align: center;
+        font-size: 24px;
+        color: cornflowerblue;
+        outline: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="items item1"></div>
+      <div class="items item2"></div>
+      <div class="items item3"></div>
+      <div class="items item4"></div>
+      <div class="items item5"></div>
+    </div>
+    <button id="btn">停</button>
+    <script>
+      var btn = document.querySelector("#btn");
+      var divs = document.querySelectorAll(".container>div");
+      // console.log(divs);
+      var flag = true;
+      btn.onclick = function () {
+        [...divs].forEach((num) => {
+          // console.log(num.classList);
+          num.classList.toggle("items");
+        });
+        if (flag) {
+          btn.innerHTML = `动`;
+          flag = false;
+        } else {
+          btn.innerHTML = `停`;
+          flag = true;
+        }
+      };
+    </script>
+  </body>
+</html>

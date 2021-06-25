@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      user-select: none;
+    }
+
+    html {
+      font-size: 10px;
+    }
+
+
+    .container {
+      width: 60vw;
+      height: 80vh;
+
+      margin: 10vh auto;
+      border-top-left-radius: 50px;
+      border-top-right-radius: 50px;
+      position: relative;
+      overflow: hidden;
+
+      /* filter: blur(2px); */
+      /* overflow: hidden; */
+    }
+
+    .container::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: url(./image/huge.jpg);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      filter: blur(50px);
+      /* background-blend-mode: screen; */
+    }
+
+    .container canvas {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .container .marquee {
+      height: 5rem;
+      width: 35vw;
+
+
+      overflow: hidden;
+      position: relative;
+      top: 20%;
+      left: 50%;
+      margin-left: -17.5vw
+    }
+
+    .marquee div {
+      display: inline-flex;
+      width: 200%;
+      height: 4rem;
+      /* white-space: nowrap; */
+      position: absolute;
+      overflow: hidden;
+      justify-content: space-evenly;
+      /* align-items: center; */
+
+      animation: marquee 5s linear infinite;
+    }
+
+    .marquee span {
+      float: left;
+      width: 50%;
+      font-size: 2.5rem;
+    }
+
+    @keyframes marquee {
+      0% {
+        left: 0;
+      }
+
+      100% {
+        left: -100%;
+      }
+    }
+
+    .container h2 {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, 0) scale(3);
+      transform-origin: top center;
+      color: #fff;
+      /* text-shadow: 3px 3px 2px #33d9b2, -3px -3px 2px #ff5252;
+      mix-blend-mode: lighten; */
+    }
+
+    audio {
+      display: none;
+    }
+
+    .container .rollfilm {
+      position: absolute;
+      box-shadow: 0 0 0 0.5vw rgba(255, 255, 255, 0.25);
+      background-color: #000;
+      --size: 13.5vw;
+      width: var(--size);
+      height: var(--size);
+      border-radius: 50%;
+      left: 50%;
+      top: 50%;
+      margin-left: calc(var(--size) / -2);
+      margin-top: calc(var(--size) / -2);
+      transition: transform .5s;
+      transform: rotate(0) scale(0.8);
+      /* outline: 1px solid red; */
+
+      /* background-image: repeating-radial-gradient(transparent 0, transparent 0.25vw, rgba(255, 255, 255, 0.9) 0.25vw, rgba(255, 255, 255, 0.9) 0.5vw); */
+    }
+
+    .container .rollfilm.active {
+      animation: rotate 5s linear infinite;
+    }
+
+    .container .rollfilm img {
+      --size: 9vw;
+      width: var(--size);
+      height: var(--size);
+      /* object-fit: cover; */
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: all .5s;
+    }
+
+    .cursor {
+      width: 8rem;
+      height: 8rem;
+      border-radius: 50%;
+      color: #fff;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      box-shadow: 0 0 0 1rem currentColor inset;
+      transform: translate(-50%, -50%);
+      background-color: transparent;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      transition: all .2s ease-out;
+      z-index: 999;
+    }
+
+    .cursor::before {
+      position: absolute;
+      clip-path: polygon(15% 0%, 100% 50%, 15% 100%);
+      content: "";
+      background-color: currentColor;
+      width: 2rem;
+      height: 2rem;
+      outline: 1px dashed red;
+      transition: transform .25s ease-in;
+    }
+
+    .cursor::after {
+      position: absolute;
+      content: "";
+      background: linear-gradient(to right, currentColor 0.4rem, transparent 0.4rem, transparent 1.6rem, currentColor 1.6rem);
+      width: 2rem;
+      height: 2rem;
+      transform: translate(200%, 0);
+      transition: transform .25s ease-in;
+      /* outline: 1px dashed red; */
+
+    }
+
+    .cursor.active::before {
+      transform: translate(-200%, 0);
+    }
+
+    .cursor.active::after {
+      transform: translate(0, 0);
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0) scale(0.8);
+      }
+
+      to {
+        transform: rotate(1turn) scale(0.8);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="marquee">
+      <div>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <h2>正在播放</h2>
+    <div class="rollfilm">
+      <img src="./image/huge.jpg" alt="">
+    </div>
+    <audio src="./audio/胡歌 - 逍遥叹 (官方版MV) 收录于(仙剑奇侠传)电视原声带.mp3" controls></audio>
+    <canvas id="canvas"></canvas>
+    <div class="cursor"></div>
+  </div>
+  <script>
+    var container = document.querySelector('.container')
+    var cursor = document.querySelector('.cursor')
+    var audio = document.querySelector('audio')
+    var film = document.querySelector('.container .rollfilm')
+    var spans = [...document.querySelectorAll('.marquee div span')]
+    var reg = /\/([^/]*)$/g
+    var res = reg.exec(decodeURI(audio.src))[1]
+    spans.forEach(item => item.innerHTML = ` 当前正在播放的歌是 ${res} `)
+    audio.crossOrigin = "anonymous";
+    console.log(cursor, spans, audio.src, res)
+    cursor.addEventListener('click', function ({ clientX, clientY }) {
+      // console.log(clientX, clientY)
+      cursor.classList.toggle('active');
+      if (cursor.classList.contains('active')) {
+        // console.log(111)
+        film.classList.add('active')
+        audio.play()
+        playaudio()
+
+      } else {
+        film.classList.remove('active')
+        audio.pause()
+
+      }
+    })
+    container.addEventListener('mousemove', function ({ clientX, clientY }) {
+      // console.log(clientX, clientY)
+      var left = this.getBoundingClientRect().left
+      var top = this.getBoundingClientRect().top
+      let x = clientX - left
+      let y = clientY - top
+      let right = this.getBoundingClientRect().right - clientX
+      let bottom = this.getBoundingClientRect().bottom - clientY
+      let leftlevel = cursor.getBoundingClientRect().width / 2
+      // let rightlevel = cursor.getBoundingClientRect().width / 2
+      let toplevel = cursor.getBoundingClientRect().height / 2
+      // console.log(`clientX为${clientX}`, `clientY为${clientY}`, x, y)
+      // console.log(leftlevel)
+      if (x < leftlevel | y < toplevel | right < leftlevel | bottom < toplevel) {
+        cursor.style.setProperty('opacity', 0)
+      } else {
+        cursor.style.setProperty('opacity', 1)
+        cursor.style.left = `${x}px`
+        cursor.style.top = `${y}px`
+      }
+
+    })
+    function playaudio() {
+      var context = new (window.AudioContext || window.webkitAudioContext)();
+      var analyser = context.createAnalyser();
+      analyser.fftSize = 512;
+      var source = context.createMediaElementSource(audio);
+
+      source.connect(analyser);
+      analyser.connect(context.destination);
+      var canvas = document.getElementById("canvas");
+      canvas.width = container.getBoundingClientRect().width
+      canvas.height = container.getBoundingClientRect().height
+      var w = canvas.width;
+      var h = canvas.height;
+      var bufferLength = analyser.frequencyBinCount;
+      var dataArray = new Uint8Array(bufferLength);
+      var ctx = canvas.getContext('2d')
+      var barWidth = w / bufferLength * 1.5;
+      var barHeight;
+
+      function renderFrame() {
+        requestAnimationFrame(renderFrame);
+
+        analyser.getByteFrequencyData(dataArray);
+        // console.log(dataArray)
+
+        ctx.clearRect(0, 0, w, h);
+
+        for (var i = 0, x = 0; i < bufferLength; i++) {
+          barHeight = dataArray[i];
+
+          var r = barHeight + 25 * (i / bufferLength);
+          var g = 250 * (i / bufferLength);
+          var b = 108;
+
+          ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
+          ctx.fillRect(x, h - barHeight, barWidth, barHeight);
+
+          x += barWidth + 2;
+        }
+      }
+
+      renderFrame();
+
+    }
+  </script>
+</body>
+
+</html>

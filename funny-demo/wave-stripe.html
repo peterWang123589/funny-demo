@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      position: relative;
+      width: 400px;
+      height: 400px;
+
+    }
+
+    .container .wave {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 200px;
+      line-height: 200px;
+      text-align: center;
+      color: #333;
+      font-size: 400%;
+      border-radius: .5em;
+      height: 200px;
+      --size: 0.25;
+      --example: 50px;
+      background: linear-gradient(135deg, deeppink calc(var(--size) * 100%), transparent calc(var(--size) * 100%)),
+        linear-gradient(225deg, deeppink calc(var(--size) * 100%), transparent calc(var(--size) * 100%)),
+        linear-gradient(315deg, deeppink calc(var(--size) * 100%), transparent calc(var(--size) * 100%)),
+        linear-gradient(45deg, deeppink calc(var(--size) * 100%), transparent calc(var(--size) * 100%));
+      background-size: var(--example) var(--example);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="wave">wave</div>
+  </div>
+</body>
+
+</html>

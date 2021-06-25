@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* .container {
+      width: 1200px;
+      overflow-y: auto;
+      height: 900px;
+    } */
+
+    .box {
+      margin: 20px auto;
+      font-size: 100px;
+      width: 4em;
+      height: 4em;
+      background-color: pink;
+      outline: 0.05em dashed #000;
+    }
+
+    .box>img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="box"><img src="" alt="" data-opt="image/dong.jpg"></div>
+  <div class="box"><img src="" alt="" data-opt="image/huigu.jpg"></div>
+  <div class="box"><img src="" alt="" data-opt="image/money.jpg"></div>
+  <div class="box"><img src="" alt="" data-opt="image/iphone.jpg"></div>
+  <div class="box"><img src="" alt="" data-opt="image/switch.jpg"></div>
+  <div class="box"><img src="" alt="" data-opt="image/你竟然是龙王.gif"></div>
+  <div class="box"><img src="" alt="" data-opt="image/回来还是个废物.gif"></div>
+  <div class="box"><img src="" alt="" data-opt="image/歪嘴.gif"></div>
+
+  <script>
+    var io = new IntersectionObserver((entries) => {
+      entries.forEach(item => {
+        if (item.intersectionRatio >= 0.5) {
+          console.log(1111111)
+          item.target.src = item.target.dataset.opt
+          io.unobserve(item.target)
+        }
+
+      })
+
+    }, {
+      root: null
+
+    })
+    const imglist = document.querySelectorAll(".box >img");
+    [...imglist].forEach(item => io.observe(item))
+  </script>
+</body>
+
+</html>

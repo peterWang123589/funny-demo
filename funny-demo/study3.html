@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style type="text/css">
+      div {
+        height: 200px;
+        margin: 10px;
+        background: pink;
+      }
+    </style>
+  </head>
+  <body>
+    <div><input type="text" /><button>提交</button></div>
+    <div></div>
+    <div></div>
+    <div id="forth"></div>
+    <div></div>
+    <div></div>
+    <script>
+      // var div = document.querySelector("#forth");
+      // console.log(div);
+      // document.addEventListener("scroll", function () {
+      //   if (window.pageYOffset > div.offsetTop) {
+      //     div.style.backgroundColor = "purple";
+      //   } else {
+      //     div.style.backgroundColor = "pink";
+      //   }
+      // });
+      var btn = document.querySelector("button");
+      console.log(btn);
+      btn.addEventListener("click", function () {
+        this.disabled = true;
+        var time = 5;
+        var that = this;
+        var timer = setInterval(function () {
+          if (time == 0) {
+            clearInterval(timer);
+            that.disabled = false;
+            that.innerHTML = "提交";
+          } else {
+            btn.innerHTML = "还要等待" + time + "才可发送";
+            time--;
+          }
+        }, 1000);
+      });
+    </script>
+  </body>
+</html>

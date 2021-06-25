@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .qq {
+      font-size: 10px;
+      position: relative;
+      color: skyblue;
+      /* background-color: #fff; */
+      width: 5em;
+      height: 10em;
+      border-radius: 50%;
+      border: 1em solid currentColor;
+      filter: drop-shadow(10em 0);
+    }
+
+    .qq::after {
+      content: "";
+      position: absolute;
+      width: 1.2em;
+      height: 3.5em;
+      border-radius: 75% 75% 100% 100%;
+      background: currentColor;
+      bottom: -1.8em;
+      right: -1.2em;
+      transform: rotate(-45deg);
+
+
+    }
+  </style>
+</head>
+
+<body>
+  <div class="qq">
+
+
+  </div>
+</body>
+
+</html>

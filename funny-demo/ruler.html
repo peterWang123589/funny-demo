@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      position: relative;
+      width: 45em;
+      height: 6em;
+      font-size: 10px;
+      background: linear-gradient(peru 45%, sandybrown 45%);
+      margin: 5em;
+    }
+
+    div::before,
+    div::after {
+      content: '';
+      position: absolute;
+      height: inherit;
+      background-image: linear-gradient(to right, darkslategray 1em, transparent 1em);
+      background-repeat: repeat-x;
+    }
+
+    div::before {
+      content: '';
+      background-size: 11em 2em;
+      left: 1em;
+      width: 44em;
+      /* outline: 1px dashed blue; */
+    }
+
+    div::after {
+      content: '';
+      background-size: 11em 1em;
+      left: 6.5em;
+      width: 38.5em;
+      /* outline: 1px dashed blue; */
+    }
+  </style>
+</head>
+
+<body>
+  <div></div>
+</body>
+
+</html>

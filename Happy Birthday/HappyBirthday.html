@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .hb-wrapper {
+      background-color: white;
+      color: black;
+      /* width: 100%;
+      height: 100%; */
+      margin: 0;
+      padding: 0;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: -1;
+    }
+
+    /* body {
+      transform-style: preserve-3d;
+      transform: perspective(800px)
+    } */
+
+    .mask-container {
+      display: none;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transform: perspective(800px);
+      /* background-color: rgba(0, 0, 0, .3); */
+      background-image: url('./haoxi_img/birthday.webp');
+      background-repeat: no-repeat;
+
+      background-position: center center;
+    }
+
+    .backup {
+      position: fixed;
+      left: 25px;
+      background-color: #4834d4;
+      display: inline-block;
+      color: #fff;
+      font-family: Helvetica, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80px;
+      width: 150px;
+      outline: none;
+      border-radius: 80px;
+      border: none;
+      top: 20px;
+      z-index: 999;
+    }
+
+    #add_move {
+      position: absolute;
+      display: inline-block;
+      border: none;
+      background-color: #4834d4;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 150px;
+      border-radius: 10px;
+      color: #fff;
+      font-family: Helvetica, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80px;
+
+    }
+
+    #add_move:focus {
+      border: none;
+      outline: none;
+    }
+
+    .barrage-box {
+      backdrop-filter: blur(5px);
+      border-top: 1px solid rgba(255, 255, 255, 0.5);
+      border-left: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+      transition: left 10s ease-out var(--delay);
+      --x: 200%;
+      --y: 50%;
+      --delay: 0s;
+      display: flex;
+      justify-content: space-between;
+      width: 300px;
+      /* background-color: crimson; */
+      border-radius: 5px;
+      position: absolute;
+      /* left: calc(100% - 300px); */
+      left: var(--x);
+      top: var(--y);
+
+    }
+
+    .barrage-box img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      /* padding: 15px; */
+      border-radius: 50%;
+      transform: scale(0.8);
+      box-shadow: .2rem .5rem .5rem rgba(0, 0, 0, .3);
+    }
+
+    .barrage-box p {
+      text-align: justify;
+      width: 200px;
+      color: #000;
+      font-family: Helvetica, sans-serif;
+      font-size: 2rem;
+
+    }
+
+    .barrage-box:hover {
+      transition: all .5s ease-in-out;
+      transform: translate(-50%, -50%) translateZ(200px) scale(2);
+      left: 50%;
+      top: 50%;
+
+
+    }
+
+    .barrage-box.move {
+      left: -100%
+    }
+
+    .cake-wrapper {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .cake-wrapper>span {
+      font-size: 6rem;
+      display: inline-block;
+      text-align: center;
+      width: 100%;
+      animation-duration: 3s;
+      animation-name: slidein;
+      animation-iteration-count: 1;
+    }
+
+    .cake-wrapper .option_box {
+
+      display: flex;
+      justify-content: center;
+      /* padding: 20px; */
+    }
+
+    .cake-wrapper .option_box .option {
+      width: 250px;
+      height: 300px;
+      position: relative;
+      /* border: 2px solid #50bcf2; */
+      /* border-radius: 10px; */
+
+    }
+
+    .cake-wrapper>h1 {
+      width: 100%;
+      text-align: center;
+    }
+
+    .cake-wrapper .option_box .option:nth-child(2) {
+      margin-left: 20px;
+    }
+
+    @keyframes slidein {
+      from {
+        margin-top: 100%;
+        width: 300%;
+      }
+
+      to {
+        margin: 0%;
+        width: 100%;
+      }
+    }
+
+    .cake-wrapper .option_box .option .cover,
+    .cake-wrapper .option_box .option .back {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      transition: all .5s ease-in-out;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      border-radius: 10px;
+      text-shadow: 0 .2rem .5rem rgba(0, 0, 0, .2);
+
+
+    }
+
+    .cover {
+      background-image: linear-gradient(109.6deg, rgba(39, 142, 255, 1) 11.2%, rgba(98, 113, 255, 0.78) 100.2%);
+      transform: rotateY(0deg);
+      backface-visibility: hidden;
+      color: white;
+      font-size: 2rem;
+    }
+
+    .back {
+      background-color: cyan;
+      transform: rotateY(-180deg);
+      backface-visibility: hidden;
+      color: #000;
+      font-size: 5rem;
+      background-image: linear-gradient(109.6deg, rgba(255, 219, 47, 1) 11.2%, rgba(244, 253, 0, 1) 100.2%);
+    }
+
+    .option:hover .cover {
+      transform: rotateY(180deg);
+    }
+
+    .option:hover .back {
+      transform: rotateY(0deg);
+    }
+
+    .music-page {
+      display: none;
+      width: 400px;
+      /* margin: 20% auto; */
+      height: 400px;
+      background-image: repeating-linear-gradient(45deg, #1E1E1E 0px, #1E1E1E 10px, #3C3C3C 10px, #3C3C3C 20px);
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 .5rem .5rem rgba(30, 30, 30, 0.6);
+      animation: rotate 5s linear infinite;
+    }
+
+    .music-page img {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 60%;
+      height: 60%;
+      background-position: center center;
+      object-fit: cover;
+      border-radius: 50%;
+
+    }
+
+    @keyframes rotate {
+      from {
+        transform: translate(-50%, -50%) rotate(0deg);
+      }
+
+      to {
+        transform: translate(-50%, -50%) rotate(1turn);
+      }
+    }
+
+    /* .music-page .circle {
+      position: absolute;
+      display: inline-block;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 30%;
+      height: 30%;
+      background-color: #000;
+      z-index: 11;
+      border-radius: 50%;
+    } */
+  </style>
+</head>
+
+<body>
+  <button class="backup" style="display: none;">
+    back
+  </button>
+  <div class="mask-container">
+    <!-- <div class="barrage-box">
+      <img src="./image/iphone.jpg" alt="">
+      <p>123</p>
+    </div> -->
+
+    <button id='add_move'>Happy Birthday!!!</button>
+  </div>
+  <div class="cake-wrapper">
+    <span>🍰</span>
+    <h1> It's time to <span style="color: #50bcf2;">celebrate birthday!</span></h1>
+    <h1>祝林琴哲生日快乐！！！</h1>
+    <div class="option_box">
+      <div class=" option">
+        <div class="cover">祝福语</div>
+        <div class="back">Click!</div>
+      </div>
+      <div class=" option">
+        <div class="cover">生日歌</div>
+        <div class="back">Click!</div>
+      </div>
+    </div>
+  </div>
+  <div class="music-page">
+    <img src="./haoxi_img/cake.webp" alt="">
+    <audio src="./Happy Birthday .mp3" style="display: none;"></audio>
+  </div>
+
+  <div id="hb-wrapper" class="hb-wrapper">
+
+  </div>
+
+  <script src='./firework.js'></script>
+  <script>
+    window.onload = function () {
+      let container = document.querySelector('.mask-container')
+      const GenerateXY = (from, to) => {
+        const x = ~~(Math.random() * (to - from + 1) + from)
+        const y = ~~(Math.random() * (to - from + 1) + from)
+        // console.log(x, y)
+        return { x, y }
+        console.log(1111)
+      }
+      // function add() {
+      //   console.log(111)
+      // }
+      // add()
+
+      const generate = () => {
+        GenerateXY(20, 80)
+      }
+      console.log(document.querySelector('button'), document.querySelector('#add_move'))
+
+      const renderBarrages = (num) => {
+        const desc = [
+          { url: './haoxi_img/1.webp', msg: '祝小哲越来越美' },
+          { url: './haoxi_img/2.jfif', msg: '祝小哲越长越高' },
+          { url: './haoxi_img/3.jpg', msg: '祝小哲每天开开心心' },
+          { url: './haoxi_img/4.jpg', msg: '祝小哲永远18岁' },
+          { url: './haoxi_img/5.jfif', msg: '祝小哲事业有成' },
+          { url: './haoxi_img/6.jpg', msg: '祝小哲越来越美' },
+          { url: './haoxi_img/7.jpg', msg: '祝小哲越长越高' },
+          { url: './haoxi_img/8.jpg', msg: '祝小哲每天开开心心' },
+          { url: './haoxi_img/9.jpg', msg: '祝小哲永远18岁' },
+          { url: './haoxi_img/10.jpg', msg: '祝小哲事业有成' }
+        ]
+        for (let i = 0; i < num; i++) {
+          let { url, msg } = desc[i]
+          container.innerHTML += `
+       <div class="barrage-box">
+      <img src=${url} alt="">
+      <p>${msg}</p>
+      </div>
+       
+       `
+          document.querySelectorAll('.barrage-box ').forEach((item, index) => {
+            // const { x, y } = GenerateXY()
+            // if (x >= 100 || y >= 100) {
+            //   item.style.setProperty('--x', `calc(${x}% - 300px)`)
+            //   item.style.setProperty('--y', `calc(${y}% - 300px )`)
+            // } else {
+            //   item.style.setProperty('--x', `${x}%`)
+            //   item.style.setProperty('--y', `${y}%`)
+            // }
+            const { y } = GenerateXY(15, 85)
+            item.style.setProperty('--x', `${100 + 55}%`)
+            item.style.setProperty('--y', `${y}%`)
+            item.style.setProperty('--delay', `${index * 0.5}s`)
+          })
+        }
+
+      }
+
+      renderBarrages(10)
+      const barrages = document.querySelectorAll('.barrage-box')
+      document.querySelector('button').addEventListener('click', function (e) {
+        console.log(11111)
+      })
+      document.querySelector('#add_move').addEventListener('click', function (e) {
+        e.target.style.display = 'none'
+        barrages.forEach(item => {
+          item.classList.remove('move')
+          void window.offsetHeight
+          console.log(111)
+          item.classList.add('move')
+        })
+      })
+      document.querySelector('.cake-wrapper .option_box .option:nth-child(1) .back').addEventListener('click', (e) => {
+
+        const mask = document.querySelector('.mask-container')
+        const backup = document.querySelector('.backup')
+        const cake = document.querySelector('.cake-wrapper')
+        cake.style.display = 'none'
+        backup.style.display = 'block'
+        mask.style.display = 'block'
+        mask.classList.remove('animate__slideOutRight')
+        mask.classList.add('animate__animated', 'animate__backInDown')
+        backup.classList.remove('animate__zoomOutUp')
+        backup.classList.add('animate__animated', 'animate__zoomIn')
+        backup.addEventListener('click', function (e) {
+          console.log(e.target)
+          e.target.classList.remove('animate__zoomIn')
+          e.target.classList.add('animate__zoomOutUp')
+          mask.classList.remove('animate__backInDown')
+          mask.classList.add('animate__slideOutRight')
+          cake.style.display = 'block'
+          cake.classList.add('animate__animated', 'animate__lightSpeedInRight')
+        })
+        console.log(111)
+      })
+      document.querySelector('.cake-wrapper .option_box .option:nth-child(2) .back').addEventListener('click', (e) => {
+        document.querySelector('.cake-wrapper').style.display = 'none'
+        document.querySelector('.music-page').style.display = 'block'
+        document.querySelector('audio').play()
+        console.log(111)
+      })
+
+    }
+  </script>
+</body>
+
+</html>

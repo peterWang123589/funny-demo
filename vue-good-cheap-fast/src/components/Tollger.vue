@@ -1,0 +1,139 @@
+<template>
+   <div class="toggler" :style='{...buttonSizeStyles}'>
+     <label>
+    <input type="checkbox" :checked='checked' @input="updateHandler">
+    <span></span>
+  </label>
+  
+  <strong>
+    <slot></slot>
+  </strong>
+   </div>
+</template>
+<script>
+export default {
+     props:{
+     size:{
+       type:Number,
+       default:1
+     },
+     checked:{
+       type:Boolean,
+default:false
+     }
+   },
+ data(){
+
+   return {
+     buttonWidth:50,
+     buttonHeight:30,
+     togglerDiameter:26,
+     togglerWider:33
+   }
+ },
+ methods:{
+updateHandler(event){
+  this.$emit('updated',event.target.checked)
+}
+ },
+ computed:{
+   buttonSizeStyles(){
+     return {
+       '--button-width':this.buttonWidth * this.size + 'px',
+       '--button-height':this.buttonHeight * this.size + 'px',
+       '--toggler-diameter':this.togglerDiameter * this.size + 'px',
+       '--toggler-wider':this.togglerWider * this.size + 'px'
+     }
+   }
+ }
+}
+</script>
+<style scoped>
+
+ .toggler{
+     display: inline-flex;
+  flex-direction: row;
+      --button-width: 500px;
+      --button-height: 295px;
+      /* 滑动小圆的直径 */
+      --toggler-diameter: 255px;
+      --button-toggle-offset: calc((var(--button-height) - var(--toggler-diameter)) / 2);
+      --toggler-shadow-offset: 10px;
+      /* 滑动小圆按住变长时的宽度 */
+      --toggler-wider: 333px;
+      --color-grey: #e9e9ea;
+      --color-dark-grey: #39393d;
+      --color-green: #30d158;
+    }
+    .toggler strong{
+      line-height: var(--button-height);
+      font-size: var(--toggler-diameter);
+      margin-left: calc(var(--button-width) / 4);
+    }
+
+    span {
+      display: inline-block;
+      width: var(--button-width);
+      height: var(--button-height);
+      background-color: var(--color-grey);
+      border-radius: calc(var(--button-height) / 2);
+      position: relative;
+      transition: all .3s cubic-bezier(.8, -.5, .2, 1.4);
+      /* cubic-bezier(.8, -.5, .2, 1.4)是我找的有点反弹效果的贝塞尔曲线 */
+    }
+
+    span::after {
+      content: '';
+      display: inline-block;
+      width: var(--toggler-diameter);
+      height: var(--toggler-diameter);
+      background-color: #fff;
+      border-radius: calc(var(--toggler-diameter) / 2);
+      position: absolute;
+      top: var(--button-toggle-offset);
+      left: 0;
+      transform: translateX(var(--button-toggle-offset));
+      box-shadow: var(--toggler-shadow-offset) 0 calc(var(--toggler-shadow-offset) * 4) rgba(0, 0, 0, .1);
+      transition: all .3s cubic-bezier(.8, -.5, .2, 1.4);
+    }
+
+    input[type='checkbox']:checked+span {
+      background-color: var(--color-green);
+    }
+
+    input[type='checkbox']:checked+span::after {
+      transform: translateX(calc(var(--button-width) - var(--toggler-diameter) - var(--button-toggle-offset)));
+      box-shadow: calc(var(--toggler-shadow-offset) * -1) 0 calc(var(--toggler-shadow-offset) * 4) rgba(0, 0, 0, .1);
+    }
+
+    input[type='checkbox']:active+span::after {
+      width: var(--toggler-wider);
+    }
+
+    input[type='checkbox']:checked:active+span::after {
+      transform: translateX(calc(var(--button-width) - var(--toggler-wider) - var(--button-toggle-offset)));
+    }
+
+    /* input:active是一直按住的动作 */
+
+    input[type='checkbox'] {
+      display: none;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    @media(prefers-color-scheme:dark) {
+      body {
+        background-color: #1c1c1e;
+      }
+
+      span {
+        background-color: var(--color-dark-grey);
+      }
+    }
+</style>

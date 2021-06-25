@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html {
+        font-size: 10px;
+      }
+      .container {
+        margin: 0 auto;
+        width: 80rem;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .center {
+        text-align: center;
+        font-size: 24px;
+        width: 5em;
+        height: 5em;
+        color: #000;
+        background: purple;
+        border-radius: 50%;
+        /* border: 1rem solid #000; */
+        box-shadow: 0 0 0 2rem #fff, 0 0 0 4rem #000, 0 0 0 6rem #fff,
+          0 0 0 8rem #000, 0 0 0 10rem #fff, 0 0 0 12rem #000;
+
+        position: absolute;
+      }
+      .center .ball1 {
+        position: absolute;
+        width: 2em;
+        height: 2em;
+        border-radius: 50%;
+        background-color: red;
+        transform-origin: 5.5em;
+        animation: 2s rotate1 linear infinite;
+        top: 50%;
+        left: 0;
+        /* transform: translate(-3em, 0); */
+      }
+      .center .ball2 {
+        position: absolute;
+        width: 2.2em;
+        height: 2.2em;
+        border-radius: 50%;
+        background-color: blue;
+        transform-origin: 7.7em;
+        top: 50%;
+        left: 0;
+        animation: 7s rotate2 linear reverse infinite;
+      }
+      .center .ball3 {
+        position: absolute;
+        width: 1em;
+        height: 1em;
+        border-radius: 50%;
+        background-color: yellow;
+        transform-origin: 3.5em;
+        top: 50%;
+        left: 0;
+        animation: 3.5s rotate3 linear reverse infinite;
+      }
+      @keyframes rotate1 {
+        0% {
+          transform: translate(-3em, -50%) rotate(0deg);
+        }
+        100% {
+          transform: translate(-3em, -50%) rotate(360deg);
+        }
+      }
+      @keyframes rotate2 {
+        0% {
+          transform: translate(-5.2em, -50%) rotate(0deg);
+        }
+        100% {
+          transform: translate(-5.2em, -50%) rotate(360deg);
+        }
+      }
+      @keyframes rotate3 {
+        0% {
+          transform: translate(-1em, -50%) rotate(0deg);
+        }
+        100% {
+          transform: translate(-1em, -50%) rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="center">
+        <div class="ball1"></div>
+        <div class="ball2"></div>
+        <div class="ball3"></div>
+      </div>
+    </div>
+  </body>
+</html>

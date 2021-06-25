@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/lottie-web/5.7.8/lottie.min.js"></script>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      flex-direction: column;
+    }
+
+
+    .bomb-box {
+      width: 600px;
+      height: 600px;
+      background-color: pink;
+    }
+
+    .btn-group {
+      display: flex;
+      width: 600px;
+      padding: 20px 0 20px 0;
+      justify-content: space-evenly;
+    }
+
+    .btn-group .btn-play {
+      width: 150px;
+      height: 40px;
+      background-color: #0984e3;
+      color: #fff;
+      font-size: 18px;
+      font-family: Helvetica, sans-serif;
+      text-align: center;
+      line-height: 40px;
+      border-radius: 6px;
+    }
+
+    .btn-group .btn-close {
+      width: 150px;
+      height: 40px;
+      /* background-color: #0984e3; */
+      border: 1px solid #0984e3;
+      color: #0984e3;
+      font-size: 18px;
+      font-family: Helvetica, sans-serif;
+      text-align: center;
+      line-height: 40px;
+      border-radius: 6px;
+    }
+
+    svg {
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bomb-box"></div>
+  <div class="btn-group">
+    <div class="btn-play">播放动画</div>
+    <div class="btn-close">关闭动画</div>
+  </div>
+  <script>
+    const anmation = window.bodymovin.loadAnimation({
+      container: document.querySelector('.bomb-box'),
+      renderer: 'svg',
+      loop: true,
+      autoplay: false,
+      path: './bomb.json'
+    })
+
+    let count = 0
+    document.querySelector('.btn-group .btn-play').addEventListener('click', function () {
+      console.log(anmation)
+
+      if (count > 0) {
+        fetch('./bomb.json').then(data => data.json()).then(res => {
+          const another_animation = window.bodymovin.loadAnimation({
+            container: document.querySelector('.bomb-box'),
+            renderer: 'svg',
+            loop: true,
+            autoplay: false,
+            animationData: res
+          })
+          console.log(res)
+          another_animation.play()
+          //设置播放速度
+          another_animation.setSpeed(count)
+
+        }
+
+        )
+        console.log(count)
+      }
+      if (anmation) {
+        anmation.play()
+        count++
+      }
+
+      // void window.innerHeight
+
+
+
+    })
+    document.querySelector('.btn-group .btn-close').addEventListener('click', function () {
+      if (anmation) anmation.destroy()
+    })
+  </script>
+</body>
+
+</html>

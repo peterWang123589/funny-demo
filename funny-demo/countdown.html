@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #4834d4;
+    }
+
+    .circle {
+      transform: rotate(-90deg);
+      transform-origin: 50% 50%
+    }
+
+    .box {
+      display: inline-flex;
+      flex-direction: column;
+    }
+
+    .countdown {
+
+      position: relative;
+    }
+
+    button {
+      display: inline-block;
+      margin-top: 30px;
+    }
+
+    .countdown span {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-size: var(--zhijing);
+      font-family: var(--type);
+      color: #f0932b;
+
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root">
+    <count-down />
+
+  </div>
+  <script>
+    const countDown = {
+      name: 'count-down',
+      data() {
+        return {
+          msg: 'ggggggggggggggg',
+          size: 250,
+          strokeWidth: 15,
+          progressRate: 0,
+          seconds: 10,
+          fontType: 'Helvetica',
+
+        }
+      },
+      template: `
+      <div class='box'>
+        <div class='countdown'>
+        <span :style='fontStyle'>{{countdown}}</span>
+        <svg :width='size' :height='size'>
+        <circle fill='transparent' :stroke-width='strokeWidth' 
+        stroke='#000' :r='radius' :cx='pos' :cy='pos' stroke-linecap='round'>
+        </circle>
+        <circle fill='transparent' :stroke-width='strokeWidth' 
+        stroke='#f0932b' :r='radius' :cx='pos' :cy='pos' 
+        :stroke-dasharray='cycle' :stroke-dashoffset='progress' class='circle' stroke-linecap='round'>
+        </circle>
+
+        </svg>
+       
+        </div>
+        <button @click='animate'>animate!!!</button>
+        </div>
+        
+      
+      `,
+      computed: {
+        cycle() {
+          return 2 * Math.PI * this.radius
+        },
+        radius() {
+          return this.size / 2 - this.strokeWidth / 2
+        },
+        pos() {
+          return this.size / 2
+        },
+        progress() {
+          return this.cycle * this.progressRate
+        },
+        fontStyle() {
+          return {
+            '--zhijing': this.radius * 1.5 + 'px',
+            '--type': this.fontType
+          }
+        },
+        countdown() {
+          return Math.ceil(this.seconds * (1 - this.progressRate))
+        }
+      },
+      methods: {
+        animate() {
+          this.timer && clearInterval(this.timer)
+          this.timer = setInterval(() => {
+            this.progressRate += 0.02
+            if (this.progressRate >= 1) {
+              clearInterval(this.timer)
+              this.progressRate = 0
+            }
+          }, this.seconds * 1000 / 50)
+
+        }
+      }
+    }
+    const vm = new Vue({
+      el: '#root',
+      data: {
+        msg: 'Hello World'
+      },
+      components: { 'count-down': countDown }
+    })
+  </script>
+</body>
+
+</html>
