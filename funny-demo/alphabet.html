@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  .alphabet {
+    font-size: 10px;
+    width: 50em;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 1em;
+    counter-reset: xxx;
+  }
+
+  .alphabet div {
+    width: 6em;
+    height: 5em;
+    border-radius: 1em;
+    background-color: lightyellow;
+    font-family: sans-serif;
+    box-shadow: 0.5em 0.5em 0.5em hsla(0, 0%, 0%, 0.3);
+    position: relative;
+    counter-increment: xxx;
+
+  }
+
+  .alphabet div::before {
+    content: counter(xxx, upper-alpha);
+    position: absolute;
+    left: 30%;
+    top: 15%;
+    font-size: 30px;
+    color: indianred;
+  }
+
+  .alphabet div::after {
+    content: counter(xxx, lower-alpha);
+    position: absolute;
+    left: 70%;
+    top: 35%;
+    font-size: 20px;
+    color: orange;
+  }
+</style>
+
+<body>
+  <div class="alphabet">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</body>
+
+</html>

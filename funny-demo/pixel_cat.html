@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../nihao-sass/css/pixel_function.css">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      flex-wrap: wrap;
+      flex-direction: column;
+    }
+
+    fieldset {
+
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+    }
+
+    input:not([type='number']) {
+      margin-left: 0.25vw;
+      border: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="cat"></div>
+
+  <fieldset>
+    轮廓<input type="color" name='outline'>
+    高光<input type="color" name='Highlight'>
+    身体<input type="color" name='body'>
+    面颊<input type="color" name='cheeks'>
+    眼睛<input type="color" name='eyes'>
+    鼻子<input type="color" name='nose'>
+    <p>
+      尺寸<input type="number" name='size' placeholder="默认尺寸为1，加1加5px" value="10">
+    </p>
+  </fieldset>
+  <script>
+    window.onload = function () {
+      const outline = document.querySelector(`input[name='outline']`)
+      const body = document.querySelector(`input[name='body']`)
+      const cheeks = document.querySelector(`input[name='cheeks']`)
+      const eyes = document.querySelector(`input[name='eyes']`)
+      const nose = document.querySelector(`input[name='nose']`)
+      const Highlight = document.querySelector(`input[name='Highlight']`)
+
+      const cat = document.getElementById('cat')
+      // console.log(cat)
+      // console.log(getComputedStyle(cat).getPropertyValue('--outline'))
+      const cc = getComputedStyle(cat)
+      // const { getPropertyValue } = getComputedStyle(cat)
+      // console.log(getPropertyValue('--outline'))
+      const [a, b, c, d, e, f] = [
+        cc.getPropertyValue('--outline'), cc.getPropertyValue('--body'),
+        cc.getPropertyValue('--cheeks'), cc.getPropertyValue('--eyes'), cc.getPropertyValue('--nose'),
+        cc.getPropertyValue('--Highlight')]
+      console.log(a, b, c, d, e)
+      outline.value = a
+      body.value = b
+      cheeks.value = c
+      eyes.value = d
+      nose.value = e
+      Highlight.value = f
+      // outline.style.setProperty('--outline', a)
+      // body.style.setProperty('--body', b)
+      // cheeks.style.setProperty('--cheeks', c)
+      // eyes.style.setProperty('--eyes', d)
+      // nose.style.setProperty('--nose', e)
+      document.querySelectorAll('input').forEach(item => {
+        item.addEventListener('change', (e) => {
+          // console.log(e.target.name)
+          if (e.target.name !== 'size') {
+            cat.style.setProperty(`--${e.target.name}`, e.target.value)
+          } else {
+            cat.style.setProperty(`--${e.target.name}`, `${e.target.value * 2}px`)
+          }
+
+
+        })
+      })
+
+
+    }
+  </script>
+</body>
+
+</html>
