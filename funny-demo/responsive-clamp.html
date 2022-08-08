@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      --n: 4;
+      --m: 2;
+      --point1: 400px;
+      --point2: 768px;
+      --gap: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0;
+      /* justify-content: space-evenly; */
+    }
+
+    .changeable-item {
+      margin: 0 var(--gap);
+      width: clamp(clamp(calc(100% / var(--n) - 2 * var(--gap)), calc((var(--point2) - 100vw) * 1000), calc(100% / var(--m) - 2 * var(--gap))), calc((var(--point1) - 100vw) * 1000), calc(100% - 2 * var(--gap)));
+      height: 30px;
+      box-sizing: border-box;
+      border: 1px solid red;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="changeable-item">1</div>
+  <div class="changeable-item">2</div>
+  <div class="changeable-item">3</div>
+  <div class="changeable-item">4</div>
+  <div class="changeable-item">5</div>
+  <div class="changeable-item">6</div>
+  <div class="changeable-item">7</div>
+</body>
+
+</html>

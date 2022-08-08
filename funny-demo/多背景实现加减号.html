@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {}
+
+    .btn-add,
+    .btn-sub {
+      width: 15rem;
+      height: 15rem;
+      border: 1px solid gray;
+      background: linear-gradient(currentColor, currentColor) no-repeat center/.875em 2px,
+        linear-gradient(currentColor, currentColor) no-repeat center/2px .875em,
+        ghostwhite;
+      color: dimgray;
+    }
+
+    .square1 {
+      width: 304px;
+      height: 160px;
+      background-color: #fff;
+      background-image: linear-gradient(45deg, #f00 25%, transparent 25%, transparent 75%, #f00 75%);
+      /* background-image: linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%),
+        linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%); */
+      background-size: 16px 16px;
+
+      /* background-position: 0 0, 8px 8px; */
+      background-position: 0 0;
+    }
+
+    .square2 {
+      width: 304px;
+      height: 160px;
+      background-color: #fff;
+      /* background-image: linear-gradient(45deg, #f00 25%, transparent 25%, transparent 75%, #f00 75%); */
+      background-image: linear-gradient(45deg, red 25%, transparent 25%, transparent 75%, red 75%),
+        linear-gradient(45deg, red 25%, transparent 25%, transparent 75%, red 75%);
+      background-size: 16px 16px;
+
+      background-position: 0 0, 8px 8px;
+      /* background-position: 0 0; */
+    }
+
+    .btn-sub {
+      background-size: .875em 2px, 0;
+    }
+  </style>
+</head>
+
+<body>
+  <button class="btn-add">加</button>
+  <!-- <input type="number" size="4" value="10"> -->
+  <button class="btn-sub">减</button>
+  <div class="square1"></div>
+  <div class="square2"></div>
+</body>
+
+</html>

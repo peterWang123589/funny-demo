@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .c-panel {
+      display: flex;
+      height: 100vh;
+
+    }
+
+    .c-panel__left {
+      background-color: tomato;
+      width: 50%;
+    }
+
+    .c-panel__right {
+      background-color: peachpuff;
+      flex-grow: 1;
+    }
+
+    .c-panel__bar {
+      background-color: #2f3640;
+      cursor: col-resize;
+      width: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="c-panel">
+    <div class="c-panel__left"></div>
+    <div class="js-resize-bar c-panel__bar"></div>
+    <div class="c-panel__right"></div>
+  </div>
+  <script>
+    let isResizing = false
+    const panel = document.querySelector(".c-panel")
+    const panelLeft = document.querySelector(".c-panel__left")
+    const resizeBar = document.querySelector(".js-resize-bar")
+    const activeResizeBar = () => {
+      isResizing = true
+    }
+
+    const resizePanel = e => {
+      if (!isResizing) return
+
+      panelLeft.style.width = `${e.clientX}px`
+
+    }
+    const stopResizing = () => {
+      isResizing = false
+    }
+
+    document.addEventListener("mouseup", stopResizing)
+
+    document.addEventListener("mousemove", resizePanel)
+
+    resizeBar.addEventListener("mousedown", activeResizeBar)
+
+
+  </script>
+
+
+</body>
+
+</html>

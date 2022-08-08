@@ -1,0 +1,13 @@
+ul {
+  font-size: 15px;
+  color: #f00;
+  li {
+    list-style: none;
+    img {
+      width: 50px;
+      object-fit: cover;
+      height: 50px;
+      border-radius: 50%;
+    }
+  }
+}

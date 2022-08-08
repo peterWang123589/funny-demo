@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .wrapper {
+      width: 1200px;
+      position: relative;
+      margin-top: 100px;
+
+    }
+
+    .wrapper::after {
+      content: '';
+      height: 1200px;
+      width: 15px;
+      background-color: #34495e;
+      position: absolute;
+      left: 50%;
+      top: -200px;
+      z-index: -999;
+      transform: translateX(-50%);
+    }
+
+    .wrapper .layer {
+      width: 100%;
+      height: 120px;
+      display: flex;
+      margin-bottom: 60px;
+      align-items: center;
+      justify-content: space-around;
+    }
+
+    .wrapper .layer .center {
+      width: 15%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    }
+
+    .wrapper .layer .center span {
+      display: inline-block;
+      width: 100px;
+      height: 40px;
+      background-color: #1abc9c;
+      border-radius: 15px;
+      line-height: 40px;
+      font-size: 24px;
+      text-align: center;
+      color: #ecf0f1;
+    }
+
+    .wrapper .layer .left,
+    .wrapper .layer .right {
+      width: 35%;
+      height: 120px;
+      border-radius: 15px;
+
+      text-align: justify;
+      padding: 10px 20px 0 20px;
+      box-sizing: border-box;
+    }
+
+    .wrapper .layer:nth-child(odd) .left {
+      background-color: #34495e;
+      color: #ecf0f1;
+    }
+
+    .wrapper .layer:nth-child(even) .right {
+      background-color: #c7ecee;
+      color: #686de0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="layer">
+      <div class="left">How should I greet, with tears, with silence.
+        　　我如何贺你，以眼泪，以沉默。</div>
+      <div class="center">
+        <span>2017</span>
+      </div>
+      <div class="right"></div>
+    </div>
+    <div class="layer">
+      <div class="left"></div>
+      <div class="center">
+        <span>2018</span>
+      </div>
+      <div class="right">if you leave me, please don't comfort me because each sewing has to meet stinging
+        pain.离开我就别安慰我，要知道每一次缝补也会遭遇穿刺的痛。</div>
+    </div>
+    <div class="layer">
+      <div class="left">I can stay to recall, only then has disconsolate.
+        　　此情可待成追忆，只是当时已惘然。</div>
+      <div class="center">
+        <span>2019</span>
+      </div>
+      <div class="right"></div>
+    </div>
+    <div class="layer">
+      <div class="left"></div>
+      <div class="center">
+        <span>2020</span>
+      </div>
+      <div class="right">if you love a girl, it's better to fight for her happiness than to abandon her for the sake of
+        her happiness.爱一个女孩子，与其为了她的幸福而放弃她，不如留住她，为她的 幸福而努力。</div>
+    </div>
+    <div class="layer">
+      <div class="left">If I should see you，after long year.
+        　　若我会见到你，事隔多年。</div>
+      <div class="center">
+        <span>2021</span>
+      </div>
+      <div class="right"></div>
+    </div>
+  </div>
+</body>
+
+</html>

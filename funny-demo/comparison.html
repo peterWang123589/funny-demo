@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .comparison {
+      --h: 400px;
+      --slide: 500;
+      --image: url(https://images.unsplash.com/photo-1438109491414-7198515b166b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80);
+      height: var(--h);
+      width: 600px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0px 2px 6px rgba(0, 0, .15);
+    }
+
+    .comparison::after,
+    .comparison::before {
+      content: '';
+      position: absolute;
+
+      width: inherit;
+      height: inherit;
+      background-image: var(--image);
+
+      background-size: cover;
+      left: 0;
+      top: 0;
+    }
+
+    .comparison::before {
+      filter: grayscale(100%);
+
+    }
+
+    .comparison::after {
+      clip-path: inset(0 0 0 calc(var(--slide) / 10 * 1%));
+
+    }
+
+    .slider {
+      position: absolute;
+      top: 0;
+      left: 0;
+      -webkit-appearance: none;
+      appearance: none;
+      z-index: 100;
+      background-color: transparent;
+      width: 100%;
+      height: 100%;
+      outline: none;
+      margin: 0;
+
+
+    }
+
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 15px;
+      height: var(--h);
+      background-color: #0fb9b1;
+      cursor: ew-resize;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="comparison">
+    <input type="range" class="slider" oninput="this.parentNode.style.setProperty('--slide',this.value)" min="1"
+      max='1000' value="500">
+  </div>
+</body>
+
+</html>

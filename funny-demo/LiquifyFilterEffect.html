@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100vh;
+
+    }
+
+    .u-center {
+      text-align: center;
+    }
+
+    .c-heading {
+      font-size: 80px;
+    }
+
+    svg {
+      max-height: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <p class="u-center">
+    <img id="main-img" src="./image//rubin.png" alt="" height="500px" style="filter: url('#liquify');">
+  </p>
+  <h1 id="heading" style="filter: url('#liquify');" class="c-heading u-center">
+    Wang Rubin</h1>
+  <svg>
+    <filter id="liquify">
+      <feTurbulence baseFrequency="0.015" numOctaves="3" result="wrap" type="fractalNoise">
+      </feTurbulence>
+      <feDisplacementMap id="liquid" in="SourceGraphic" in2="wrap" scale="0" xChannelSelector="R" yChannelSelector="B">
+      </feDisplacementMap>
+    </filter>
+  </svg>
+  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eligendi consectetur voluptatibus repudiandae aliquam
+    consequuntur. Sunt nam, deleniti facilis quas quis fugiat nobis, possimus numquam quod praesentium saepe. Laborum,
+    accusamus.
+  </p>
+  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eligendi consectetur voluptatibus repudiandae aliquam
+    consequuntur. Sunt nam, deleniti facilis quas quis fugiat nobis, possimus numquam quod praesentium saepe. Laborum,
+    accusamus.
+  </p>
+  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eligendi consectetur voluptatibus repudiandae aliquam
+    consequuntur. Sunt nam, deleniti facilis quas quis fugiat nobis, possimus numquam quod praesentium saepe. Laborum,
+    accusamus.
+  </p>
+  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eligendi consectetur voluptatibus repudiandae aliquam
+    consequuntur. Sunt nam, deleniti facilis quas quis fugiat nobis, possimus numquam quod praesentium saepe. Laborum,
+    accusamus.
+  </p>
+  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eligendi consectetur voluptatibus repudiandae aliquam
+    consequuntur. Sunt nam, deleniti facilis quas quis fugiat nobis, possimus numquam quod praesentium saepe. Laborum,
+    accusamus.
+  </p>
+  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eligendi consectetur voluptatibus repudiandae aliquam
+    consequuntur. Sunt nam, deleniti facilis quas quis fugiat nobis, possimus numquam quod praesentium saepe. Laborum,
+    accusamus.
+  </p>
+  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eligendi consectetur voluptatibus repudiandae aliquam
+    consequuntur. Sunt nam, deleniti facilis quas quis fugiat nobis, possimus numquam quod praesentium saepe. Laborum,
+    accusamus.
+  </p>
+  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eligendi consectetur voluptatibus repudiandae aliquam
+    consequuntur. Sunt nam, deleniti facilis quas quis fugiat nobis, possimus numquam quod praesentium saepe. Laborum,
+    accusamus.
+  </p>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenMax.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/animation.gsap.js"></script>
+  <script>
+    const controller = new ScrollMagic.Controller()
+    new ScrollMagic.Scene({
+      duration: 800  // the scene should last for a scroll distance of 100px,
+      //这个duration很有迷惑性，以为是和持续时间有关，实际上表示滚动距离
+    }).setTween("#liquid", {
+      attr: {
+        scale: 500
+      }
+    }).addTo(controller)
+
+    new ScrollMagic.Scene({
+      duration: 500
+    }).setTween(["#main-img", "#heading"], {
+      css: {
+        opacity: 0
+      }
+    }).addTo(controller)
+
+  </script>
+</body>
+
+</html>

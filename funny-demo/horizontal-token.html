@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+
+    }
+
+    .token-header {
+      display: flex;
+      width: 50%;
+      column-gap: 10px;
+    }
+
+    .horizontal-token-item {
+      width: 100px;
+      position: relative;
+      color: #ddd;
+
+    }
+
+    .horizontal-token-item .token-title {
+      position: absolute;
+      width: fit-content;
+      height: fit-content;
+      margin: auto;
+      left: 5px;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      color: inherit;
+      z-index: 999;
+
+
+    }
+
+    .horizontal-token-item::before,
+    .horizontal-token-item::after {
+      content: '';
+      width: inherit;
+      height: 30px;
+      background-color: royalblue;
+      display: block;
+    }
+
+    .horizontal-token-item::before {
+      transform: skewX(30deg);
+    }
+
+    .horizontal-token-item::after {
+      transform: skewX(-30deg);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="token-header">
+    <div class="horizontal-token-item">
+      <div class="token-title">1-规则说明</div>
+    </div>
+    <div class="horizontal-token-item">
+      <div class="token-title">2-参与活动</div>
+    </div>
+    <div class="horizontal-token-item">
+      <div class="token-title">3-参与抽奖</div>
+    </div>
+    <div class="horizontal-token-item">
+      <div class="token-title">4-奖品发放</div>
+    </div>
+    <div class="horizontal-token-item">
+      <div class="token-title">5-查看结果</div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .loading {
+      width: 4px;
+      height: 4px;
+      border-radius: 100%;
+      color: rgba(0, 0, 0, .4);
+      box-shadow: 0 -10px rgba(0, 0, 0, .9),
+        10px 0px,
+        0 10px,
+        -10px 0 rgba(0, 0, 0, .7),
+        -7px -7px rgba(0, 0, 0, .8),
+        7px -7px rgba(0, 0, 0, 1),
+        7px 7px,
+        -7px 7px;
+      animation: spin 1s steps(8) infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="loading"></div>
+</body>
+
+</html>

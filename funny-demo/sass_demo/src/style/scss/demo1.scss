@@ -1,0 +1,208 @@
+@import "./easings.scss";
+$transition: 0.2s $easeInQuad;
+
+body {
+  --dark-light: hsla(241, 13%, 12%, 1);
+  --light-light: hsla(42, 100%, 63%, 1);
+  --dark-filament: hsla(241, 11%, 6%, 1);
+  --light-filament: hsla(2, 100%, 70%, 1);
+  
+  --dark-laptop: hsla(217, 14%, 33%, 1);
+  --light-laptop: hsla(217, 14%, 83%, 1);
+  --dark-laptop-logo: hsla(258, 70%, 25%, 1);
+  --light-laptop-logo: hsla(258, 70%, 75%, 1);
+  --dark-laptop-shadow: hsla(0, 0%, 30%, 1);
+  --light-laptop-shadow: hsla(0, 0%, 100%, 1);
+  --dark-cup: hsla(354, 81%, 13%, 1);
+  --light-cup: hsla(354, 81%, 63%, 1);
+  --dark-cup-shadow: hsla(0, 0%, 30%, 1);
+  --light-cup-shadow: hsla(0, 0%, 100%, 1);
+  --dark-wood-1: hsla(30, 50%, 15%, 1);
+  --light-wood-1: hsla(30, 50%, 85%, 1);
+  --dark-wood-2: hsla(0, 0%, 20%, 1);
+  --light-wood-2: hsla(0, 0%, 100%, 1);
+  --dark-bin: hsla(213, 79%, 14%, 1);
+  --light-bin: hsla(213, 79%, 64%, 1);
+  --dark-bin-shadow: hsla(0, 0%, 20%, 1);
+  --light-bin-shadow: hsla(0, 0%, 100%, 1);
+
+  background-color: hsla(241, 12%, 16%, 1);
+  
+  &.is-light-on {
+    background-image: linear-gradient(
+      180deg,
+      hsla(241, 12%, 29%, 1) 10%,
+      hsla(241, 12%, 16%, 1) 90%,
+    );
+  }
+}
+
+.o-main {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+
+.c-bulb {
+  position: absolute;
+  top: 20px;
+  transform: rotate(180deg);
+  width: 50px;
+  
+  path {
+    transition: fill $transition;
+  }
+}
+
+@mixin light-on($dark, $light) {
+  fill: $dark;
+  
+  .is-light-on & {
+    fill: $light;
+  }
+}
+
+$bulbPath: (
+  light: (var(--dark-light), var(--light-light)),
+  filament: (var(--dark-filament), var(--light-filament)),
+);
+
+@each $name, $colors in $bulbPath {
+  $darkColor: nth($colors, 1);
+  $lightColor: nth($colors, 2);
+  
+  .c-bulb__#{$name} {
+    @include light-on($darkColor, $lightColor);
+  }
+}
+
+// .c-bulb__light {
+//   @include light-on(var(--dark-light), var(--light-light));
+// }
+
+// .c-bulb__filament {
+//   @include light-on(var(--dark-filament), var(--light-filament));
+// }
+
+.c-bulb__glow {
+  background-image: radial-gradient(
+    hsla(50, 100%, 63%, 1),
+    hsla(52, 100%, 50%, 0) 70%
+  );
+  display: block;
+  height: 100px;
+  left: 50%;
+  opacity: 0;
+  position: absolute;
+  transform: translateX(-50%) scale(0);
+  transition: all $transition;
+  top: -35px;
+  width: 100px;
+  
+  .is-light-on & {
+    opacity: 0.35;
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+.c-desk {
+  width: 300px;
+  
+  path {
+    transition: fill $transition;
+  }
+}
+
+$deskPath: (
+  laptop: (var(--dark-laptop), var(--light-laptop)),
+  laptop-logo: (var(--dark-laptop-logo), var(--light-laptop-logo)),
+  laptop-shadow: (var(--dark-laptop-shadow), var(--light-laptop-shadow)),
+  cup: (var(--dark-cup), var(--light-cup)),
+  cup-shadow: (var(--dark-cup-shadow), var(--light-cup-shadow)),
+  wood-1: (var(--dark-wood-1), var(--light-wood-1)),
+  wood-2: (var(--dark-wood-2), var(--light-wood-2)),
+  bin: (var(--dark-bin), var(--light-bin)),
+  bin-shadow: (var(--dark-bin-shadow), var(--light-bin-shadow)),
+);
+
+@each $name, $colors in $deskPath {
+  $darkColor: nth($colors, 1);
+  $lightColor: nth($colors, 2);
+  
+  .c-desk__#{$name} {
+    @include light-on($darkColor, $lightColor);
+  }
+}
+
+// .c-desk__laptop {
+//   fill: var(--dark-laptop);
+  
+//   .is-light-on & {
+//     fill: var(--light-laptop);
+//   }
+// }
+
+// .c-desk__laptop-logo {
+//   fill: var(--dark-laptop-logo);
+  
+//   .is-light-on & {
+//     fill: var(--light-laptop-logo);
+//   }
+// }
+
+// .c-desk__laptop-shadow {
+//   fill: var(--dark-laptop-shadow);
+  
+//   .is-light-on & {
+//     fill: var(--light-laptop-shadow);
+//   }
+// }
+
+// .c-desk__cup {
+//   fill: var(--dark-cup);
+  
+//   .is-light-on & {
+//     fill: var(--light-cup);
+//   }
+// }
+
+// .c-desk__cup-shadow {
+//   fill: var(--dark-cup-shadow);
+  
+//   .is-light-on & {
+//     fill: var(--light-cup-shadow);
+//   }
+// }
+
+// .c-desk__wood-1 {
+//   fill: var(--dark-wood-1);
+  
+//   .is-light-on & {
+//     fill: var(--light-wood-1);
+//   }
+// }
+
+// .c-desk__wood-2 {
+//   fill: var(--dark-wood-2);
+  
+//   .is-light-on & {
+//     fill: var(--light-wood-2);
+//   }
+// }
+
+// .c-desk__bin {
+//   fill: var(--dark-bin);
+  
+//   .is-light-on & {
+//     fill: var(--light-bin);
+//   }
+// }
+
+// .c-desk__bin-shadow {
+//   fill: var(--dark-bin-shadow);
+  
+//   .is-light-on & {
+//     fill: var(--light-bin-shadow);
+//   }
+// }

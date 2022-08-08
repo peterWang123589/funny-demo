@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    wavy {
+      display: block;
+      height: .5em;
+      white-space: nowrap;
+      letter-spacing: 100vw;
+      padding-top: .5em;
+      overflow: hidden;
+    }
+
+    wavy::before {
+      content: "\2000\2000";
+      /* IE浏览器用实线代替*/
+      text-decoration: overline;
+      text-decoration-color: darkgoldenrod;
+      /* 现代浏览器，Safari浏览器不支持text-decoration：overline wavy缩写*/
+      text-decoration-style: wavy;
+    }
+
+    p {
+      width: 300px;
+      font-size: 18px;
+      padding-bottom: 10px;
+      position: relative;
+      word-break: break-all;
+      text-decoration: underline;
+      text-decoration-color: darkgoldenrod;
+      /* 现代浏览器，Safari浏览器不支持text-decoration：overline wavy缩写*/
+      text-decoration-style: wavy;
+      text-underline-position: under;
+      text-underline-offset: 5px;
+      line-height: 40px;
+    }
+
+
+
+    /* p::selection {
+      background-color: burlywood;
+      color: #FFF;
+
+
+      /* 波浪线样式无法在::selection中使用 */
+    /* text-decoration-style: wavy;
+      text-decoration-color: red;
+      text-decoration-line: underline; */
+
+    }
+
+    */
+  </style>
+</head>
+
+<body>
+  <p>dasdkajfksdjfakfjakfjkajfdakfjdakdfjakdfjakfjadkfj</p>
+  <!-- <wavy /> -->
+</body>
+
+</html>

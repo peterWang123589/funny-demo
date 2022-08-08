@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    @import url('https://fonts.font.im/css?family=Ruslan+Display');
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      row-gap: 15px;
+    }
+
+    body>.view {
+      width: 80vw;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(4, 100px);
+      grid-template-areas:
+        'a1 a2 a2 a3'
+        'a4 a5 a5 a6'
+        'a7 a7 a8 a9'
+        'a10 a10 a11 a11';
+      column-gap: 10px;
+      row-gap: 10px;
+
+    }
+
+    .view-item .card {
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      background-color: rgba(25, 42, 86, .8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 24px;
+      font-family: 'Ruslan Display', cursive;
+    }
+
+    .view .view-item:nth-child(1) {
+      grid-area: a1;
+    }
+
+    .view .view-item:nth-child(2) {
+      grid-area: a2;
+    }
+
+    .view .view-item:nth-child(3) {
+      grid-area: a3;
+    }
+
+    .view .view-item:nth-child(4) {
+      grid-area: a4;
+    }
+
+    .view .view-item:nth-child(5) {
+      grid-area: a5;
+    }
+
+    .view .view-item:nth-child(6) {
+      grid-area: a6;
+    }
+
+    .view .view-item:nth-child(7) {
+      grid-area: a7;
+    }
+
+    .view .view-item:nth-child(8) {
+      grid-area: a8;
+    }
+
+    .view .view-item:nth-child(9) {
+      grid-area: a9;
+    }
+
+    .view .view-item:nth-child(10) {
+      grid-area: a10;
+    }
+
+    .view .view-item:nth-child(11) {
+      grid-area: a11;
+    }
+
+    .button {
+      display: inline-block;
+      border-radius: 20px;
+      background: none;
+      color: royalblue;
+      border: 1px solid;
+      padding: 5px 10px;
+
+    }
+
+    .button--primary {
+      display: inline-block;
+      border-radius: 20px;
+      background: royalblue;
+      color: #fff;
+
+      padding: 5px 10px;
+    }
+
+    .preview {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      row-gap: 20px;
+    }
+
+    .preview>a {
+      text-decoration: none;
+    }
+
+
+
+    .preview--close {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="view">
+    <div class="view-item">
+      <div class="card">
+        1
+      </div>
+    </div>
+    <div class="view-item">
+      <div class="card">
+        2
+      </div>
+    </div>
+    <div class="view-item">
+      <div class="card">
+        3
+      </div>
+    </div>
+    <div class="view-item">
+      <div class="card">
+        4
+      </div>
+    </div>
+    <div class="view-item">
+      <div class="card">
+        5
+      </div>
+    </div>
+
+    <div class="view-item">
+      <div class="card">
+        6
+      </div>
+    </div>
+    <div class="view-item">
+      <div class="card">
+        7
+      </div>
+    </div>
+    <div class="view-item">
+      <div class="card">
+        8
+      </div>
+    </div>
+    <div class="view-item">
+      <div class="card">
+        9
+      </div>
+    </div>
+    <div class="view-item">
+      <div class="card">
+        10
+      </div>
+    </div>
+    <div class="view-item">
+      <div class="card">
+        11
+      </div>
+    </div>
+
+  </div>
+  <div class="button">长按保存为截图</div>
+  <div class="preview preview--close">
+  </div>
+
+  <script src="./html2canvas.min.js"></script>
+  <script src="./longtap.js"></script>
+  <script>
+    window.onload = function () {
+      function $(selector) {
+        return document.querySelector(selector)
+      }
+      function convertToImage(targetSelector, previewSelector) {
+        // let canvas = document.createElement('canvas')
+        const target = $(targetSelector)
+        console.log(target.getBoundingClientRect())
+        const width = target.getBoundingClientRect().width
+        const height = target.getBoundingClientRect().height
+        // canvas.width = width * 2
+        // canvas.height = height * 2
+        // canvas.style.width = width + 'px'
+        // canvas.style.height = height + 'px'
+        // var ctx = canvas.getContext('2d')
+        // ctx.scale(2, 2)
+        const preview = $(previewSelector)
+        html2canvas(target, { width, height, scale: 1 }).then((canva) => {
+          var imageData = canva.toDataURL('image/png');
+          let a = document.createElement('a')
+          a.download = 'default.png'
+          a.href = imageData
+          a.innerHTML = '点击下载'
+          a.classList.add('button--primary')
+          preview.innerHTML = `<img src=${imageData}></img>`
+          preview.appendChild(a)
+
+        })
+      }
+      longtap('.button', function (dom, e) {
+        $('.preview').classList.remove('preview--close')
+        convertToImage('.view', '.preview')
+      })
+      $('.preview').onclick = function (e) {
+        this.classList.add('preview--close')
+      }
+    }
+
+  </script>
+
+</body>
+
+</html>

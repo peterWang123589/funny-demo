@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas></canvas>
+  <script>
+    const canvas = document.querySelector("canvas")
+    const ctx = canvas.getContext("2d")
+    canvas.width = innerWidth
+    canvas.height = innerHeight
+
+
+    class Circle {
+      constructor({ position, R = 60, r = 10, velocity = { x: 0, y: 0 } }) {
+        this.position = position
+        this.radius = 0
+        this.ctx = ctx
+        this.R = R
+        this.r = r
+        this.broke = false
+        this.velocity = velocity
+      }
+      draw() {
+        this.ctx.strokeStyle = "green"
+        this.ctx.beginPath()
+        this.ctx.arc(this.position.x, this.position.y, this.R, 0, Math.PI * 2, false)
+        this.ctx.stroke()
+
+        this.ctx.fillStyle = 'tomato'
+        this.ctx.beginPath()
+        let x, y
+        if (!this.broke) {
+          this.x = this.position.x + this.R * Math.cos(this.radius)
+          this.y = this.position.y + this.R * Math.sin(this.radius)
+        } else {
+          console.log(this.velocity.x, this.velocity)
+          this.x += this.velocity.x
+          this.y += this.velocity.y
+        }
+
+        this.ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2, false)
+        this.ctx.fill()
+      }
+      update() {
+        this.draw()
+        this.radius += 0.05
+      }
+
+
+    }
+    let circles = [], index = 0
+    window.addEventListener("mousedown", ({ clientX, clientY }) => {
+      circles.push(new Circle({ position: { x: clientX, y: clientY } }))
+    })
+
+    window.addEventListener("mouseup", ({ clientX, clientY }) => {
+      let circle = circles[index++]
+      circle.broke = true
+      let k = Math.atan2(circle.y - circle.position.y, circle.x - circle.position.x)
+      let kk = Math.tan(k)
+      let kkk = -1 / kk
+      let kkkk = Math.atan(kkk)
+      circle.velocity.x = Math.cos(kkkk) * 2
+      circle.velocity.y = Math.sin(kkkk) * 2
+
+
+
+    })
+
+
+    const animate = () => {
+      requestAnimationFrame(animate)
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      circles.forEach((circle, circleIndex) => {
+        circle.update()
+
+      })
+    }
+    animate()
+
+
+  </script>
+</body>
+
+</html>
